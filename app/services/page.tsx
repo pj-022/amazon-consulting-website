@@ -1,154 +1,119 @@
-import Link from "next/link";
-import { ArrowRight, CheckCircle2 } from "lucide-react";
-import { buttonVariants } from "@/components/ui/button";
-import { Reveal } from "@/components/motion/reveal";
-import { Stagger, StaggerItem } from "@/components/motion/stagger";
+import { Marquee } from "@/components/editorial/marquee";
+import { LinkRoll } from "@/components/editorial/link-roll";
 import { Container } from "@/components/sections/container";
-import { PageHero } from "@/components/sections/page-hero";
-import { SectionHeader } from "@/components/sections/section-header";
-import { brandThemes, services } from "@/lib/site-data";
+import { brandThemes, capabilities, services } from "@/lib/site-data";
 import { cn } from "@/lib/utils";
 
 export default function ServicesPage() {
   return (
     <>
-      <section className="hero-glow border-b border-border">
-        <Container className="py-20 lg:py-24">
-          <PageHero
-            eyebrow="Services"
-            title="Advisory for every stage of your Vendor Central program"
-            description="From foundational architecture to ongoing optimization — each engagement is scoped around measurable commercial outcomes."
-          >
-            <nav className="mt-10 flex flex-wrap gap-2">
-              {services.map((service) => (
-                <a
-                  key={service.id}
-                  href={`#${service.id}`}
-                  className="tag-pill px-4 py-2 text-sm"
-                >
-                  {service.title}
-                </a>
-              ))}
-            </nav>
-          </PageHero>
+      <section className="grain section-warm border-b border-border">
+        <Container className="py-24 lg:py-32">
+          <p className="editorial-label">Services</p>
+          <h1 className="display-lg mt-8 max-w-4xl uppercase text-foreground">
+            Advisory for every stage of your{" "}
+            <em className="italic normal-case text-accent">Vendor Central</em>{" "}
+            program
+          </h1>
+          <p className="body-editorial mt-8 max-w-2xl">
+            From foundational architecture to ongoing optimization — each
+            engagement is scoped around measurable commercial outcomes.
+          </p>
         </Container>
       </section>
 
-      <section className="py-20 lg:py-24">
-        <Container className="space-y-16">
-          <Stagger className="space-y-16">
-            {services.map((service, index) => {
-              const theme = brandThemes[service.theme];
-              return (
-                <StaggerItem key={service.id}>
-                  <article id={service.id} className="scroll-mt-28">
+      <Marquee items={capabilities} speed="slow" />
+
+      <section className="section-cream py-24 lg:py-32">
+        <Container className="space-y-0">
+          {services.map((service, index) => {
+            const theme = brandThemes[service.theme];
+            return (
+              <article
+                key={service.id}
+                id={service.id}
+                className="scroll-mt-28 border-b border-border py-16 first:pt-0 last:border-b-0 lg:py-24"
+              >
+                <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] lg:gap-20">
+                  <div className="lg:sticky lg:top-32 lg:self-start">
+                    <p className="num-display">
+                      {String(index + 1).padStart(2, "0")}
+                    </p>
+                    <h2 className="display-md mt-6 text-foreground">
+                      {service.title}
+                    </h2>
                     <div
                       className={cn(
-                        "surface-card-interactive overflow-hidden border-l-4",
-                        theme.border
+                        "mt-8 inline-flex h-14 w-14 items-center justify-center border",
+                        theme.surfaceBorder,
+                        theme.surface
                       )}
                     >
-                      <div className="border-b border-border bg-muted/30 px-8 py-8 sm:px-10">
-                        <p
-                          className={cn(
-                            "text-xs font-semibold uppercase tracking-wider",
-                            theme.accent
-                          )}
-                        >
-                          {String(index + 1).padStart(2, "0")}
+                      <service.icon className={cn("h-6 w-6", theme.accent)} />
+                    </div>
+                    <div className="mt-8 space-y-4 border-t border-border pt-8">
+                      <div>
+                        <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+                          Ideal for
                         </p>
-                        <div className="mt-3 flex items-start justify-between gap-4">
-                          <h2 className="max-w-2xl text-3xl font-medium tracking-tight sm:text-4xl">
-                            {service.title}
-                          </h2>
-                          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-primary text-primary-foreground transition-transform duration-300 hover:scale-105">
-                            <service.icon className="h-6 w-6" />
-                          </div>
-                        </div>
-                        <p className="mt-4 max-w-3xl text-base leading-relaxed text-muted-foreground">
-                          {service.description}
+                        <p className="mt-2 text-sm text-foreground">
+                          {service.idealFor}
                         </p>
                       </div>
-
-                      <div className="grid gap-8 p-8 lg:grid-cols-[1fr_1.2fr] lg:p-10">
-                        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
-                          <div className="rounded-lg border border-border bg-muted/30 p-5 transition-colors duration-300 hover:bg-muted/50">
-                            <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-                              Ideal for
-                            </p>
-                            <p className="mt-2 text-sm font-medium text-foreground">
-                              {service.idealFor}
-                            </p>
-                          </div>
-                          <div className="rounded-lg border border-border bg-muted/30 p-5 transition-colors duration-300 hover:bg-muted/50">
-                            <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-                              Timeline
-                            </p>
-                            <p className="mt-2 text-sm font-medium text-foreground">
-                              {service.timeline}
-                            </p>
-                          </div>
-                        </div>
-
-                        <div>
-                          <h3 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">
-                            Deliverables
-                          </h3>
-                          <ul className="mt-5 space-y-3">
-                            {service.deliverables.map((item) => (
-                              <li
-                                key={item}
-                                className="flex items-start gap-3 text-sm text-muted-foreground"
-                              >
-                                <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
-                                <span>{item}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
+                      <div>
+                        <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+                          Timeline
+                        </p>
+                        <p className="mt-2 text-sm text-foreground">
+                          {service.timeline}
+                        </p>
                       </div>
                     </div>
-                  </article>
-                </StaggerItem>
-              );
-            })}
-          </Stagger>
+                  </div>
+
+                  <div>
+                    <p className="body-editorial">{service.description}</p>
+                    <div className="mt-12">
+                      <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+                        Deliverables
+                      </p>
+                      <ul className="mt-6 divide-y divide-border border-y border-border">
+                        {service.deliverables.map((item) => (
+                          <li
+                            key={item}
+                            className="py-4 text-sm leading-relaxed text-foreground/80"
+                          >
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </article>
+            );
+          })}
         </Container>
       </section>
 
-      <section className="surface-muted border-t border-border py-20">
-        <Container>
-          <Reveal>
-            <div className="surface-card-interactive grid gap-8 p-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-center lg:p-12">
-              <SectionHeader
-                eyebrow="Next step"
-                title="Not sure which engagement fits?"
-                description="We'll help you scope the right starting point based on spend level, internal capabilities, and current performance."
-              />
-              <div className="flex flex-col gap-3">
-                <Link
-                  href="/contact"
-                  className={buttonVariants({
-                    size: "lg",
-                    className: "btn-premium h-11",
-                  })}
-                >
-                  Talk to an advisor
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-                <Link
-                  href="/case-studies"
-                  className={buttonVariants({
-                    size: "lg",
-                    variant: "outline",
-                    className: "h-11",
-                  })}
-                >
-                  See outcomes
-                </Link>
-              </div>
-            </div>
-          </Reveal>
+      <section className="section-ink grain py-24 lg:py-32">
+        <Container className="text-center">
+          <p className="editorial-label-light">Next step</p>
+          <h2 className="display-md mt-6 text-primary-foreground">
+            Not sure which engagement fits?
+          </h2>
+          <p className="body-editorial-light mx-auto mt-6 max-w-xl">
+            We&apos;ll help you scope the right starting point based on spend
+            level, internal capabilities, and current performance.
+          </p>
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-8">
+            <LinkRoll href="/contact" light>
+              Talk to an advisor
+            </LinkRoll>
+            <LinkRoll href="/case-studies" light>
+              See outcomes
+            </LinkRoll>
+          </div>
         </Container>
       </section>
     </>

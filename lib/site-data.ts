@@ -323,3 +323,62 @@ export const capabilities = [
   "Executive reporting",
   "Prime Day planning",
 ] as const;
+
+export const clientCategories = [
+  "Consumer Electronics",
+  "Home & Kitchen",
+  "Health & Personal Care",
+  "Beauty",
+  "Pet Care",
+  "Outdoor & Sports",
+  "Baby",
+  "Grocery",
+] as const;
+
+export const languages = [
+  { word: "ROAS", description: "Commercial outcomes, not vanity metrics" },
+  { word: "Vendor Central", description: "1P complexity, not marketplace noise" },
+  { word: "C-Suite", description: "Board-ready narratives and reporting" },
+  { word: "Operations", description: "Budget models your team can run" },
+] as const;
+
+export const narrativeSections = [
+  {
+    number: "01",
+    label: "the first thing you should know about us",
+    headline: "WE BUILT VENDOREDGE FOR BRANDS TIRED OF GENERIC AMAZON ADVICE",
+    subhead: "Most agencies treat Vendor Central like Seller Central with a bigger invoice.",
+    paragraphs: [
+      "We could've stayed broad. But our best work always lived in the complexity of 1P — where inventory, margin, and advertising decisions are inseparable.",
+      "We learned what moves a program forward: structure before bids, governance before scale, and reporting leadership actually reads.",
+      "So what's worth sharing now is the point of view the real work built.",
+    ],
+    keywords: ["ROAS", "Vendor Central", "Sponsored Products", "Budget models", "Agencies", "Reporting"],
+    cta: { label: "See our work", href: "/case-studies" },
+  },
+  {
+    number: "02",
+    label: "the second thing you should know about us",
+    headline: "MOST OF OUR CLIENTS COME FROM TRUSTED REFERRALS",
+    subhead: "That's how a focused studio grows — through consistency, not cold outreach.",
+    paragraphs: [
+      "We're partners who are direct, commercially minded, and allergic to deckware.",
+      "Project to project, referral after referral, we meet teams where they are — collaborating at the right time, for the right reasons.",
+      "Do rigorous work. Let the work speak.",
+    ],
+    keywords: ["Referrals", "Partnership", "Transparency", "Senior advisors", "Long-term"],
+    cta: { label: "About us", href: "/about" },
+  },
+  {
+    number: "03",
+    label: "the third thing you should know about us",
+    headline: "WE TAKE PRIDE IN MAKING ADVERTISING DECISIONS THAT ACTUALLY SHIP",
+    subhead: "Strategy is nothing without an operating model your team can run.",
+    paragraphs: [
+      "Vision without execution is a slide deck. We build both — the campaign architecture and the cadence that keeps it improving.",
+      "Campaigns. Budgets. Audits. And everything it takes to make them seamless inside Vendor Central.",
+    ],
+    keywords: ["Strategy", "Execution", "Cadence", "Governance", "Optimization"],
+    cta: { label: "Our services", href: "/services" },
+  },
+] as const;

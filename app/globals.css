@@ -115,7 +115,11 @@
   }
 
   .surface-card {
-    @apply rounded-xl border border-border bg-card shadow-sm transition-shadow hover:shadow-md;
+    @apply rounded-xl border border-border bg-card shadow-sm transition-all duration-300;
+  }
+
+  .surface-card-interactive {
+    @apply rounded-xl border border-border bg-card shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:border-border/80 hover:shadow-lg;
   }
 
   .surface-muted {
@@ -124,11 +128,144 @@
 
   .hero-glow {
     background:
-      radial-gradient(ellipse 70% 55% at 85% 15%, oklch(0.62 0.14 45 / 0.07), transparent 55%),
-      radial-gradient(ellipse 50% 40% at 10% 80%, oklch(0.55 0.08 255 / 0.05), transparent 50%);
+      radial-gradient(ellipse 70% 55% at 85% 15%, oklch(0.62 0.14 45 / 0.09), transparent 55%),
+      radial-gradient(ellipse 50% 40% at 10% 80%, oklch(0.55 0.08 255 / 0.06), transparent 50%);
+    position: relative;
+  }
+
+  .hero-glow::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      105deg,
+      transparent 40%,
+      oklch(0.62 0.14 45 / 0.03) 50%,
+      transparent 60%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 12s ease-in-out infinite;
+    pointer-events: none;
   }
 
   .accent-highlight {
     @apply text-accent;
+    background: linear-gradient(
+      135deg,
+      oklch(0.62 0.14 45),
+      oklch(0.58 0.12 35)
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .tag-pill {
+    @apply rounded-md border border-border bg-card px-3 py-1.5 text-xs font-medium text-muted-foreground transition-all duration-300 hover:border-accent/30 hover:text-foreground;
+  }
+
+  .btn-premium {
+    @apply relative overflow-hidden shadow-md transition-all duration-300 hover:-translate-y-px hover:shadow-lg;
+  }
+
+  .btn-premium::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      120deg,
+      transparent 30%,
+      oklch(1 0 0 / 0.12) 50%,
+      transparent 70%
+    );
+    transform: translateX(-120%);
+    transition: transform 0.6s ease;
+  }
+
+  .btn-premium:hover::after {
+    transform: translateX(120%);
+  }
+
+  .nav-link {
+    @apply relative rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground;
+  }
+
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    left: 0.75rem;
+    right: 0.75rem;
+    bottom: 0.35rem;
+    height: 1.5px;
+    border-radius: 999px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .nav-link:hover::after,
+  .nav-link[data-active="true"]::after {
+    transform: scaleX(1);
+  }
+
+  .cta-panel {
+    @apply relative overflow-hidden rounded-2xl bg-primary px-8 py-12 text-primary-foreground sm:px-12 lg:px-16 lg:py-16;
+  }
+
+  .cta-panel::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+      135deg,
+      oklch(0.62 0.14 45 / 0.5),
+      transparent 40%,
+      oklch(0.55 0.08 255 / 0.3)
+    );
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  .dashboard-float {
+    animation: float 7s ease-in-out infinite;
+  }
+
+  @keyframes shimmer {
+    0%,
+    100% {
+      background-position: 200% 0;
+    }
+    50% {
+      background-position: -200% 0;
+    }
+  }
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-6px);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-glow::before,
+    .dashboard-float,
+    .btn-premium::after {
+      animation: none;
+      transition: none;
+    }
   }
 }

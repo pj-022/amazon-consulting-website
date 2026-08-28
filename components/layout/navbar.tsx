@@ -2,8 +2,9 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Menu } from "lucide-react";
+import { motion, useReducedMotion } from "framer-motion";
 import { buttonVariants } from "@/components/ui/button";
 import { Sheet, SheetContent } from "@/components/ui/sheet";
 import { Container } from "@/components/sections/container";
@@ -13,13 +14,37 @@ import { cn } from "@/lib/utils";
 export function Navbar() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const reduceMotion = useReducedMotion();
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 12);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border bg-card/90 backdrop-blur-md">
+    <motion.header
+      className={cn(
+        "sticky top-0 z-50 border-b transition-colors duration-300",
+        scrolled
+          ? "border-border/80 bg-card/95 shadow-sm backdrop-blur-lg"
+          : "border-border bg-card/90 backdrop-blur-md"
+      )}
+      initial={reduceMotion ? false : { y: -20, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+    >
       <Container>
-        <div className="flex h-16 items-center justify-between lg:h-[4.25rem]">
-          <Link href="/" className="flex items-center gap-3">
-            <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary text-xs font-bold text-primary-foreground">
+        <div
+          className={cn(
+            "flex items-center justify-between transition-all duration-300",
+            scrolled ? "h-14 lg:h-[3.75rem]" : "h-16 lg:h-[4.25rem]"
+          )}
+        >
+          <Link href="/" className="group flex items-center gap-3">
+            <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary text-xs font-bold text-primary-foreground transition-transform duration-300 group-hover:scale-105">
               VE
             </span>
             <div className="leading-none">
@@ -39,11 +64,10 @@ export function Navbar() {
                 <Link
                   key={item.href}
                   href={item.href}
+                  data-active={active}
                   className={cn(
-                    "rounded-md px-3 py-2 text-sm font-medium transition-colors",
-                    active
-                      ? "bg-muted text-foreground"
-                      : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                    "nav-link",
+                    active && "bg-muted/60 text-foreground"
                   )}
                 >
                   {item.label}
@@ -55,7 +79,7 @@ export function Navbar() {
           <div className="hidden lg:block">
             <Link
               href="/contact"
-              className={buttonVariants({ className: "h-9 px-4" })}
+              className={buttonVariants({ className: "btn-premium h-9 px-4" })}
             >
               Book a consultation
             </Link>
@@ -64,7 +88,7 @@ export function Navbar() {
           <button
             type="button"
             onClick={() => setOpen(true)}
-            className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-border text-foreground lg:hidden"
+            className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-border text-foreground transition-colors hover:bg-muted lg:hidden"
             aria-label="Open menu"
           >
             <Menu className="h-4 w-4" />
@@ -80,7 +104,7 @@ export function Navbar() {
                 key={item.href}
                 href={item.href}
                 onClick={() => setOpen(false)}
-                className="rounded-md px-3 py-3 text-base font-medium text-foreground hover:bg-muted"
+                className="rounded-md px-3 py-3 text-base font-medium text-foreground transition-colors hover:bg-muted"
               >
                 {item.label}
               </Link>
@@ -88,13 +112,13 @@ export function Navbar() {
             <Link
               href="/contact"
               onClick={() => setOpen(false)}
-              className={buttonVariants({ className: "mt-4 h-11" })}
+              className={buttonVariants({ className: "btn-premium mt-4 h-11" })}
             >
               Book a consultation
             </Link>
           </div>
         </SheetContent>
       </Sheet>
-    </header>
+    </motion.header>
   );
 }

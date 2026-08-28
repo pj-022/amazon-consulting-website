@@ -3,6 +3,8 @@ import { Cormorant_Garamond, DM_Sans, IBM_Plex_Mono, Syne } from "next/font/goog
 import "./globals.css";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
+import { ThemeProvider } from "@/components/providers/theme-provider";
+import { company } from "@/lib/site-data";
 
 const dmSans = DM_Sans({
   variable: "--font-sans",
@@ -30,7 +32,7 @@ const ibmPlexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Amazon Advertising Consulting | Vendor Central Experts - VendorEdge",
+  title: `Amazon Advertising Consulting | Vendor Central Experts - ${company.name}`,
   description:
     "Strategic Amazon advertising consulting for Vendor Central. Campaign optimization, budget planning, and performance audits for Sponsored Products, Brands & Display.",
   keywords: [
@@ -42,15 +44,15 @@ export const metadata: Metadata = {
     "Sponsored Display",
     "ROAS Optimization",
   ],
-  authors: [{ name: "VendorEdge Consulting" }],
-  metadataBase: new URL("https://vendoredge.com"),
+  authors: [{ name: company.name }],
+  metadataBase: new URL(company.url),
   openGraph: {
     title: "Amazon Advertising Consulting | Vendor Central Experts",
     description:
       "Strategic Amazon advertising consulting for Vendor Central. Drive ROI through data-driven campaign optimization.",
     type: "website",
     locale: "en_US",
-    siteName: "VendorEdge Consulting",
+    siteName: company.name,
   },
   twitter: {
     card: "summary_large_image",
@@ -64,6 +66,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${dmSans.variable} ${cormorant.variable} ${syne.variable} ${ibmPlexMono.variable} h-full antialiased`}
     >
       <head>
@@ -73,11 +76,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "ProfessionalService",
-              name: "VendorEdge Consulting",
+              name: company.name,
               description:
                 "Strategic Amazon advertising consulting for Vendor Central",
-              url: "https://vendoredge.com",
-              email: "hello@vendoredge.com",
+              url: company.url,
+              email: company.email,
               address: {
                 "@type": "PostalAddress",
                 addressCountry: "US",
@@ -96,10 +99,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           }}
         />
       </head>
-      <body className="min-h-full flex flex-col font-sans">
-        <Navbar />
-        <main className="flex-1">{children}</main>
-        <Footer />
+      <body className="min-h-full flex flex-col bg-background font-sans text-foreground">
+        <ThemeProvider>
+          <Navbar />
+          <main className="flex-1">{children}</main>
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );

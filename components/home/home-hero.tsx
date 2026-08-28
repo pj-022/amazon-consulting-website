@@ -5,6 +5,7 @@ import { AmbientTypography, ColorOrbs } from "@/components/editorial/ambient";
 import { EditorialButton } from "@/components/editorial/editorial-button";
 import { LinkRoll } from "@/components/editorial/link-roll";
 import { Container } from "@/components/sections/container";
+import { company } from "@/lib/site-data";
 import { transition, staggerContainer, fadeUp } from "@/lib/motion";
 
 const item = fadeUp;
@@ -23,7 +24,7 @@ export function HomeHero() {
         <em className="font-serif italic text-gradient-warm">core channel</em>
       </h1>
       <p className="body-editorial mt-10 max-w-xl">
-        VendorEdge helps 1P brands improve ROAS, reduce wasted spend, and build
+        {company.name} helps 1P brands improve ROAS, reduce wasted spend, and build
         advertising systems leadership can trust — across Sponsored Products,
         Brands, and Display.
       </p>
@@ -69,7 +70,7 @@ export function HomeHero() {
               variants={item}
               transition={transition}
             >
-              VendorEdge helps 1P brands improve ROAS, reduce wasted spend, and
+              {company.name} helps 1P brands improve ROAS, reduce wasted spend, and
               build advertising systems leadership can trust — across Sponsored
               Products, Brands, and Display.
             </motion.p>

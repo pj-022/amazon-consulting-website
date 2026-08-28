@@ -1,14 +1,15 @@
 import { Container } from "@/components/sections/container";
+import { company } from "@/lib/site-data";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy - VendorEdge Consulting",
-  description: "Privacy policy for VendorEdge Amazon Advertising Consulting services.",
+  title: `Privacy Policy - ${company.name}`,
+  description: `Privacy policy for ${company.name} Amazon Advertising Consulting services.`,
 };
 
 export default function PrivacyPage() {
   return (
-    <section className="py-20">
+    <section className="section-warm py-20">
       <Container narrow>
         <h1 className="text-4xl font-medium tracking-tight text-foreground">
           Privacy Policy
@@ -16,7 +17,7 @@ export default function PrivacyPage() {
         <div className="prose-width mt-8 space-y-6 text-sm leading-relaxed text-muted-foreground">
           <p>Last updated: {new Date().toLocaleDateString()}</p>
           <p>
-            VendorEdge Consulting respects your privacy and is committed to protecting
+            {company.name} respects your privacy and is committed to protecting
             your personal information. This policy explains how we collect, use, and
             safeguard data submitted through our website.
           </p>
@@ -33,8 +34,8 @@ export default function PrivacyPage() {
           <h2 className="text-lg font-medium text-foreground">Contact</h2>
           <p>
             Questions about this policy can be sent to{" "}
-            <a href="mailto:hello@vendoredge.com" className="text-foreground underline">
-              hello@vendoredge.com
+            <a href={`mailto:${company.email}`} className="text-accent underline">
+              {company.email}
             </a>
             .
           </p>

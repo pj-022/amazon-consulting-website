@@ -6,6 +6,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import { buttonVariants } from "@/components/ui/button";
 import { fadeUp, staggerContainer, transition } from "@/lib/motion";
 import { capabilities } from "@/lib/site-data";
+import { company } from "@/lib/site-data";
 
 const item = fadeUp;
 
@@ -38,7 +39,7 @@ export function HeroContent() {
         variants={item}
         transition={transition}
       >
-        VendorEdge helps 1P brands improve ROAS, reduce wasted spend, and build
+        {company.name} helps 1P brands improve ROAS, reduce wasted spend, and build
         advertising systems leadership can trust — across Sponsored Products,
         Brands, and Display.
       </motion.p>
@@ -94,7 +95,7 @@ function HeroContentStatic() {
         <span className="accent-highlight">leaving revenue</span> on the table?
       </h1>
       <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
-        VendorEdge helps 1P brands improve ROAS, reduce wasted spend, and build
+        {company.name} helps 1P brands improve ROAS, reduce wasted spend, and build
         advertising systems leadership can trust — across Sponsored Products,
         Brands, and Display.
       </p>

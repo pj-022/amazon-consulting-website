@@ -36,7 +36,7 @@ export function Marquee({
     <div
       className={cn(
         "overflow-hidden border-y",
-        light ? "border-primary-foreground/10 bg-ink" : "border-border bg-cream/30",
+        light ? "border-primary-foreground/10 bg-ink" : "border-border bg-muted/30",
         className
       )}
     >

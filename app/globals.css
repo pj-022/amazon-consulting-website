@@ -65,6 +65,9 @@
   --navy: #1a3a5c;
   --sage: #3d5a4a;
   --blush: #e8d5c4;
+  --surface-warm: #faf7f2;
+  --surface-cream: #f3ede3;
+  --surface-ink: #0e1014;
   --background: #faf7f2;
   --foreground: #0e1014;
   --card: #f3ede3;
@@ -97,6 +100,71 @@
   --sidebar-accent-foreground: #0e1014;
   --sidebar-border: #d9d0c4;
   --sidebar-ring: #c24e1a;
+  --gradient-warm-1: #c24e1a;
+  --gradient-warm-2: #8b4513;
+  --gradient-warm-3: #1a3a5c;
+  --orb-terracotta: #c24e1a55;
+  --orb-navy: #1a3a5c44;
+  --orb-sage: #3d5a4a40;
+  --warm-glow-1: #c24e1a0d;
+  --warm-glow-2: #1a3a5c0a;
+  --cream-glow: #e8d5c440;
+  --ink-glow-1: #c24e1a18;
+  --ink-glow-2: #3d5a4a15;
+}
+
+.dark {
+  --ink: #060709;
+  --cream: #14161c;
+  --warm: #0f1116;
+  --terracotta: #e8622a;
+  --navy: #6b9fd4;
+  --sage: #6aab8a;
+  --blush: #3d3028;
+  --surface-warm: #0f1116;
+  --surface-cream: #14161c;
+  --surface-ink: #060709;
+  --background: #0a0b0f;
+  --foreground: #f2ece3;
+  --card: #14161c;
+  --card-foreground: #f2ece3;
+  --popover: #14161c;
+  --popover-foreground: #f2ece3;
+  --primary: #f2ece3;
+  --primary-foreground: #0a0b0f;
+  --secondary: #1c1f27;
+  --secondary-foreground: #f2ece3;
+  --muted: #1c1f27;
+  --muted-foreground: #9a9590;
+  --accent: #e8622a;
+  --accent-foreground: #0a0b0f;
+  --border: #2a2e38;
+  --input: #1c1f27;
+  --ring: #e8622a;
+  --chart-1: #e8622a;
+  --chart-2: #6b9fd4;
+  --chart-3: #8a7a68;
+  --chart-4: #c9a227;
+  --chart-5: #6aab8a;
+  --sidebar: #0a0b0f;
+  --sidebar-foreground: #f2ece3;
+  --sidebar-primary: #f2ece3;
+  --sidebar-primary-foreground: #0a0b0f;
+  --sidebar-accent: #1c1f27;
+  --sidebar-accent-foreground: #f2ece3;
+  --sidebar-border: #2a2e38;
+  --sidebar-ring: #e8622a;
+  --gradient-warm-1: #e8622a;
+  --gradient-warm-2: #c45d28;
+  --gradient-warm-3: #6b9fd4;
+  --orb-terracotta: #e8622a40;
+  --orb-navy: #6b9fd430;
+  --orb-sage: #6aab8a30;
+  --warm-glow-1: #e8622a14;
+  --warm-glow-2: #6b9fd410;
+  --cream-glow: #e8622a0a;
+  --ink-glow-1: #e8622a20;
+  --ink-glow-2: #6aab8a18;
 }
 
 @layer base {
@@ -121,9 +189,14 @@
   }
 
   ::selection {
-    background: #c24e1a33;
-    color: #0e1014;
+    background: color-mix(in oklch, var(--accent) 25%, transparent);
+    color: var(--foreground);
   }
+}
+
+.dark .grain::after {
+  opacity: 0.15;
+  mix-blend-mode: soft-light;
 }
 
 @layer utilities {
@@ -234,36 +307,38 @@
   }
 
   .color-orb-terracotta {
-    background: radial-gradient(circle, #c24e1a55 0%, transparent 70%);
+    background: radial-gradient(circle, var(--orb-terracotta) 0%, transparent 70%);
   }
 
   .color-orb-navy {
-    background: radial-gradient(circle, #1a3a5c44 0%, transparent 70%);
+    background: radial-gradient(circle, var(--orb-navy) 0%, transparent 70%);
   }
 
   .color-orb-sage {
-    background: radial-gradient(circle, #3d5a4a40 0%, transparent 70%);
+    background: radial-gradient(circle, var(--orb-sage) 0%, transparent 70%);
   }
 
   .section-warm {
     background:
-      radial-gradient(ellipse 60% 50% at 100% 0%, #c24e1a0d, transparent 55%),
-      radial-gradient(ellipse 50% 40% at 0% 100%, #1a3a5c0a, transparent 50%),
-      #faf7f2;
+      radial-gradient(ellipse 60% 50% at 100% 0%, var(--warm-glow-1), transparent 55%),
+      radial-gradient(ellipse 50% 40% at 0% 100%, var(--warm-glow-2), transparent 50%),
+      var(--surface-warm);
+    color: var(--foreground);
   }
 
   .section-cream {
     background:
-      radial-gradient(ellipse 55% 45% at 0% 50%, #e8d5c440, transparent 55%),
-      #f3ede3;
+      radial-gradient(ellipse 55% 45% at 0% 50%, var(--cream-glow), transparent 55%),
+      var(--surface-cream);
+    color: var(--foreground);
   }
 
   .section-ink {
     background:
-      radial-gradient(ellipse 70% 60% at 80% 20%, #c24e1a18, transparent 55%),
-      radial-gradient(ellipse 50% 50% at 10% 80%, #3d5a4a15, transparent 50%),
-      #0e1014;
-    @apply text-primary-foreground;
+      radial-gradient(ellipse 70% 60% at 80% 20%, var(--ink-glow-1), transparent 55%),
+      radial-gradient(ellipse 50% 50% at 10% 80%, var(--ink-glow-2), transparent 50%),
+      var(--surface-ink);
+    color: var(--primary-foreground);
   }
 
   .narrative-accent-bar {
@@ -272,7 +347,12 @@
   }
 
   .text-gradient-warm {
-    background: linear-gradient(135deg, #c24e1a, #8b4513, #1a3a5c);
+    background: linear-gradient(
+      135deg,
+      var(--gradient-warm-1),
+      var(--gradient-warm-2),
+      var(--gradient-warm-3)
+    );
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;

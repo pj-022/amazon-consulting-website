@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { EditorialButton } from "@/components/editorial/editorial-button";
+import { ThemeToggle } from "@/components/layout/theme-toggle";
 import { Container } from "@/components/sections/container";
 import { company, navItems } from "@/lib/site-data";
 import { cn } from "@/lib/utils";
@@ -62,11 +63,12 @@ export function Navbar() {
         >
           <span className="block font-serif text-lg tracking-tight">{company.name}</span>
           <span className="hidden text-[10px] uppercase tracking-[0.2em] text-muted-foreground sm:block">
-            Vendor Central Advisory
+            {company.tagline}
           </span>
         </Link>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3 sm:gap-4">
+          <ThemeToggle />
           <EditorialButton href="/contact" variant="primary" className="hidden px-5 py-2.5 text-xs sm:inline-flex">
             Book a consultation
           </EditorialButton>

@@ -1,7 +1,8 @@
 import { MetadataRoute } from 'next';
+import { company } from '@/lib/site-data';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://vendoredge.com';
+  const baseUrl = company.url;
   
   return [
     {

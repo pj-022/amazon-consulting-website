@@ -7,9 +7,10 @@ import {
 } from "lucide-react";
 
 export const company = {
-  name: "VendorEdge",
+  name: "Ad Kwik",
   tagline: "Amazon Vendor Central Advertising Advisory",
-  email: "hello@vendoredge.com",
+  email: "hello@adkwik.com",
+  url: "https://adkwik.com",
   hours: "Monday–Friday, 9 AM – 6 PM EST",
 };
 
@@ -230,7 +231,7 @@ export const caseStudies = [
       { label: "Timeline", value: "90 days" },
     ],
     quote:
-      "VendorEdge gave us a clear operating model for advertising — not just tactical fixes, but a system we could run confidently.",
+      "Ad Kwik gave us a clear operating model for advertising — not just tactical fixes, but a system we could run confidently.",
     author: "Sarah Mitchell",
     role: "Director of E-Commerce",
   },
@@ -290,7 +291,7 @@ export const testimonials = [
   {
     theme: "coral" as BrandThemeKey,
     quote:
-      "VendorEdge transformed our Amazon advertising from a cost center into a measurable growth lever. ROAS improved 52% within the first quarter.",
+      "Ad Kwik transformed our Amazon advertising from a cost center into a measurable growth lever. ROAS improved 52% within the first quarter.",
     author: "Sarah Mitchell",
     role: "Director of E-Commerce",
     company: "TechGear Solutions",
@@ -306,7 +307,7 @@ export const testimonials = [
   {
     theme: "mint" as BrandThemeKey,
     quote:
-      "Prime Day used to be chaotic. VendorEdge gave us structure, pacing discipline, and confidence in our spend.",
+      "Prime Day used to be chaotic. Ad Kwik gave us structure, pacing discipline, and confidence in our spend.",
     author: "Jessica Roberts",
     role: "Head of Digital Commerce",
     company: "WellnessFirst",
@@ -346,7 +347,7 @@ export const narrativeSections = [
   {
     number: "01",
     label: "the first thing you should know about us",
-    headline: "WE BUILT VENDOREDGE FOR BRANDS TIRED OF GENERIC AMAZON ADVICE",
+    headline: "WE BUILT AD KWIK FOR BRANDS TIRED OF GENERIC AMAZON ADVICE",
     subhead: "Most agencies treat Vendor Central like Seller Central with a bigger invoice.",
     paragraphs: [
       "We could've stayed broad. But our best work always lived in the complexity of 1P — where inventory, margin, and advertising decisions are inseparable.",

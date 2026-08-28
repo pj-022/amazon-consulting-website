@@ -3,7 +3,7 @@ import { LinkRoll } from "@/components/editorial/link-roll";
 import { NarrativeSection } from "@/components/editorial/narrative-section";
 import { MetricsEditorial } from "@/components/home/metrics-editorial";
 import { Container } from "@/components/sections/container";
-import { narrativeSections, processSteps } from "@/lib/site-data";
+import { company, narrativeSections, processSteps } from "@/lib/site-data";
 
 const principles = [
   {
@@ -34,7 +34,7 @@ export default function AboutPage() {
             <em className="italic normal-case text-accent">core channel</em>
           </h1>
           <p className="body-editorial mt-8 max-w-2xl">
-            VendorEdge was built for Vendor Central teams who need more than
+            {company.name} was built for Vendor Central teams who need more than
             campaign maintenance. We help marketing and e-commerce leaders make
             better advertising decisions with structure, measurement, and
             accountability.

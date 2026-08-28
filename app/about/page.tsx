@@ -2,7 +2,6 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { Container } from "@/components/sections/container";
-import { ColorBlobs } from "@/components/sections/color-blobs";
 import { SectionHeader } from "@/components/sections/section-header";
 import { brandThemes, heroMetrics, processSteps } from "@/lib/site-data";
 import { cn } from "@/lib/utils";
@@ -31,15 +30,11 @@ const principles = [
 export default function AboutPage() {
   return (
     <>
-      <section className="relative overflow-hidden border-b border-border/60">
-        <ColorBlobs />
-        <Container className="relative py-20 lg:py-24">
-          <span className="brand-pill border-[#7EC8FF] bg-[#E8F4FF] text-[#0369A1]">
-            About
-          </span>
-          <h1 className="mt-6 max-w-3xl text-4xl font-medium tracking-tight sm:text-5xl lg:text-6xl">
-            Senior advisory for brands that treat Amazon as a{" "}
-            <span className="gradient-text-warm">core channel</span>
+      <section className="hero-glow border-b border-border">
+        <Container className="py-20 lg:py-24">
+          <p className="eyebrow">About</p>
+          <h1 className="mt-5 max-w-3xl text-4xl font-medium tracking-tight sm:text-5xl lg:text-6xl">
+            Senior advisory for brands that treat Amazon as a core channel
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">
             VendorEdge was built for Vendor Central teams who need more than campaign
@@ -51,20 +46,18 @@ export default function AboutPage() {
 
       <section className="py-20 lg:py-24">
         <Container>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {heroMetrics.map((metric) => {
               const theme = brandThemes[metric.theme];
               return (
                 <div
                   key={metric.label}
-                  className={cn("card-colorful border-2 p-6", theme.border, theme.bg)}
+                  className={cn("surface-card border-l-4 p-6", theme.border)}
                 >
-                  <p className={cn("text-3xl font-bold tabular-nums", theme.text)}>
+                  <p className="text-3xl font-semibold tabular-nums text-foreground">
                     {metric.value}
                   </p>
-                  <p className="mt-2 text-sm font-medium text-foreground/70">
-                    {metric.label}
-                  </p>
+                  <p className="mt-2 text-sm text-muted-foreground">{metric.label}</p>
                 </div>
               );
             })}
@@ -73,20 +66,18 @@ export default function AboutPage() {
           <div className="mt-20 grid gap-12 lg:grid-cols-[0.9fr_1.1fr]">
             <SectionHeader
               eyebrow="Our approach"
-              theme="coral"
-              title="Consulting with personality — and proof"
-              description="We believe authority comes from clarity, color, and recommendations leadership can act on immediately."
+              title="Consulting with clarity and commercial focus"
+              description="We believe authority comes from frameworks, evidence, and recommendations leadership can act on immediately."
             />
-            <div className="space-y-5">
+            <div className="space-y-4">
               {principles.map((item) => {
                 const theme = brandThemes[item.theme];
                 return (
                   <div
                     key={item.title}
-                    className={cn("card-colorful border-2 p-6", theme.border)}
+                    className={cn("surface-card border-l-4 p-6", theme.border)}
                   >
-                    <div className={cn("mb-3 h-1 w-10 rounded-full bg-gradient-to-r", theme.gradient)} />
-                    <h3 className="text-lg font-semibold text-foreground">{item.title}</h3>
+                    <h3 className="text-lg font-medium text-foreground">{item.title}</h3>
                     <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                       {item.description}
                     </p>
@@ -98,11 +89,10 @@ export default function AboutPage() {
         </Container>
       </section>
 
-      <section id="process" className="section-tint-mint border-y border-border/60 py-20 lg:py-24">
+      <section id="process" className="surface-muted border-y border-border py-20 lg:py-24">
         <Container>
           <SectionHeader
             eyebrow="Engagement model"
-            theme="mint"
             title="How engagements typically run"
             description="A structured path from diagnostic to sustained performance improvement."
           />
@@ -112,17 +102,12 @@ export default function AboutPage() {
               return (
                 <div
                   key={step.step}
-                  className={cn("card-colorful border-2 p-6", theme.border)}
+                  className={cn("surface-card border-l-4 p-6", theme.border)}
                 >
-                  <div
-                    className={cn(
-                      "mb-4 flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br text-sm font-bold text-white",
-                      theme.gradient
-                    )}
-                  >
+                  <p className={cn("text-sm font-semibold tabular-nums", theme.accent)}>
                     {step.step}
-                  </div>
-                  <h3 className="text-lg font-semibold text-foreground">{step.title}</h3>
+                  </p>
+                  <h3 className="mt-4 text-lg font-medium text-foreground">{step.title}</h3>
                   <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
                     {step.description}
                   </p>
@@ -135,20 +120,20 @@ export default function AboutPage() {
 
       <section className="py-20">
         <Container>
-          <div className="cta-rainbow relative overflow-hidden rounded-3xl px-8 py-12 lg:px-12">
-            <h2 className="relative max-w-2xl text-3xl font-medium tracking-tight text-white sm:text-4xl">
-              Ready to bring structure — and energy — to your advertising program?
+          <div className="rounded-2xl bg-primary px-8 py-12 text-primary-foreground lg:px-12">
+            <h2 className="max-w-2xl text-3xl font-medium tracking-tight sm:text-4xl">
+              Ready to bring structure to your advertising program?
             </h2>
-            <p className="relative mt-4 max-w-2xl text-sm leading-relaxed text-white/80 sm:text-base">
+            <p className="mt-4 max-w-2xl text-sm leading-relaxed text-primary-foreground/75 sm:text-base">
               Start with a consultation. We'll review your current setup and outline
               practical next steps.
             </p>
             <Link
               href="/contact"
-              className={cn(
-                buttonVariants({ size: "lg" }),
-                "btn-gradient relative mt-8 h-12 border-0 font-semibold"
-              )}
+              className={buttonVariants({
+                size: "lg",
+                className: "mt-8 h-11 bg-accent text-accent-foreground hover:bg-accent/90",
+              })}
             >
               Book a consultation
               <ArrowRight className="ml-2 h-4 w-4" />

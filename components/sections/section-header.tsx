@@ -6,7 +6,6 @@ export function SectionHeader({
   title,
   description,
   align = "left",
-  theme,
   className,
 }: {
   eyebrow?: string;
@@ -16,8 +15,6 @@ export function SectionHeader({
   theme?: BrandThemeKey;
   className?: string;
 }) {
-  const palette = theme ? brandThemes[theme] : null;
-
   return (
     <div
       className={cn(
@@ -26,18 +23,7 @@ export function SectionHeader({
         className
       )}
     >
-      {eyebrow ? (
-        <span
-          className={cn(
-            "brand-pill mb-5",
-            palette
-              ? `${palette.bg} ${palette.border} ${palette.text}`
-              : "border-accent/30 bg-accent/10 text-accent"
-          )}
-        >
-          {eyebrow}
-        </span>
-      ) : null}
+      {eyebrow ? <p className="eyebrow mb-4">{eyebrow}</p> : null}
       <h2 className="font-serif text-3xl font-medium tracking-tight text-foreground sm:text-4xl lg:text-[2.75rem] lg:leading-[1.1]">
         {title}
       </h2>
@@ -46,6 +32,29 @@ export function SectionHeader({
           {description}
         </p>
       ) : null}
+    </div>
+  );
+}
+
+export function AccentCard({
+  theme,
+  className,
+  children,
+}: {
+  theme: BrandThemeKey;
+  className?: string;
+  children: React.ReactNode;
+}) {
+  const palette = brandThemes[theme];
+  return (
+    <div
+      className={cn(
+        "surface-card border-l-4 pl-6",
+        palette.border,
+        className
+      )}
+    >
+      {children}
     </div>
   );
 }

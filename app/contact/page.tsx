@@ -15,7 +15,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Container } from "@/components/sections/container";
-import { ColorBlobs } from "@/components/sections/color-blobs";
 import { company } from "@/lib/site-data";
 import { contactFormSchema, type ContactFormData } from "@/lib/validations";
 
@@ -61,19 +60,15 @@ export default function ContactPage() {
 
   return (
     <>
-      <section className="relative overflow-hidden border-b border-border/60">
-        <ColorBlobs />
-        <Container className="relative py-20 lg:py-24">
-          <span className="brand-pill border-[#6EE7B7] bg-[#E8FFF5] text-[#047857]">
-            Contact
-          </span>
-          <h1 className="mt-6 max-w-3xl text-4xl font-medium tracking-tight sm:text-5xl lg:text-6xl">
-            Let's talk about your{" "}
-            <span className="gradient-text">advertising goals</span>
+      <section className="hero-glow border-b border-border">
+        <Container className="py-20 lg:py-24">
+          <p className="eyebrow">Contact</p>
+          <h1 className="mt-5 max-w-3xl text-4xl font-medium tracking-tight sm:text-5xl lg:text-6xl">
+            Start with a focused conversation about your program
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">
-            Tell us about your current setup. We respond within one business day with
-            next steps for a consultation.
+            Tell us about your current advertising setup. We respond within one business
+            day with next steps for a consultation.
           </p>
         </Container>
       </section>
@@ -81,8 +76,8 @@ export default function ContactPage() {
       <section className="py-20 lg:py-24">
         <Container>
           <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr]">
-            <div className="card-colorful border-2 border-[#C4B5FD] bg-white/80 p-8 lg:p-10">
-              <h2 className="text-2xl font-semibold text-foreground">
+            <div className="surface-card p-8 lg:p-10">
+              <h2 className="text-2xl font-medium text-foreground">
                 Request a consultation
               </h2>
               <p className="mt-2 text-sm text-muted-foreground">
@@ -90,17 +85,17 @@ export default function ContactPage() {
               </p>
 
               {submitSuccess && (
-                <div className="mt-6 flex items-start gap-3 rounded-xl border-2 border-[#6EE7B7] bg-[#E8FFF5] p-4 text-[#047857]">
+                <div className="mt-6 flex items-start gap-3 rounded-lg border border-emerald-200 bg-emerald-50 p-4 text-emerald-900">
                   <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0" />
                   <div>
-                    <p className="font-semibold">Message sent successfully.</p>
+                    <p className="font-medium">Message sent successfully.</p>
                     <p className="text-sm">We'll respond within 24 hours.</p>
                   </div>
                 </div>
               )}
 
               {submitError && (
-                <div className="mt-6 rounded-xl border-2 border-red-200 bg-red-50 p-4 text-sm text-red-800">
+                <div className="mt-6 rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-800">
                   {submitError}
                 </div>
               )}
@@ -108,7 +103,7 @@ export default function ContactPage() {
               <form onSubmit={handleSubmit(onSubmit)} className="mt-8 space-y-5">
                 <div className="grid gap-5 sm:grid-cols-2">
                   <div>
-                    <label htmlFor="name" className="mb-2 block text-sm font-semibold">
+                    <label htmlFor="name" className="mb-2 block text-sm font-medium">
                       Name *
                     </label>
                     <Input id="name" {...register("name")} placeholder="Jane Smith" />
@@ -117,7 +112,7 @@ export default function ContactPage() {
                     )}
                   </div>
                   <div>
-                    <label htmlFor="email" className="mb-2 block text-sm font-semibold">
+                    <label htmlFor="email" className="mb-2 block text-sm font-medium">
                       Email *
                     </label>
                     <Input
@@ -133,14 +128,14 @@ export default function ContactPage() {
                 </div>
 
                 <div>
-                  <label htmlFor="company" className="mb-2 block text-sm font-semibold">
+                  <label htmlFor="company" className="mb-2 block text-sm font-medium">
                     Company
                   </label>
                   <Input id="company" {...register("company")} placeholder="Company name" />
                 </div>
 
                 <div>
-                  <label htmlFor="adSpend" className="mb-2 block text-sm font-semibold">
+                  <label htmlFor="adSpend" className="mb-2 block text-sm font-medium">
                     Monthly ad spend *
                   </label>
                   <Select
@@ -164,7 +159,7 @@ export default function ContactPage() {
                 </div>
 
                 <div>
-                  <label htmlFor="message" className="mb-2 block text-sm font-semibold">
+                  <label htmlFor="message" className="mb-2 block text-sm font-medium">
                     How can we help? *
                   </label>
                   <Textarea
@@ -181,7 +176,7 @@ export default function ContactPage() {
                 <Button
                   type="submit"
                   size="lg"
-                  className="btn-gradient h-12 w-full border-0 font-semibold sm:w-auto"
+                  className="h-11 w-full sm:w-auto"
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? (
@@ -197,53 +192,38 @@ export default function ContactPage() {
             </div>
 
             <aside className="space-y-6">
-              <div className="card-colorful border-2 border-[#7EC8FF] bg-[#E8F4FF]/50 p-8">
+              <div className="surface-card p-8">
                 <div className="flex items-start gap-4">
-                  <div className="rounded-xl bg-gradient-to-br from-[#0EA5E9] to-[#38BDF8] p-3 text-white">
-                    <Mail className="h-5 w-5" />
+                  <div className="rounded-lg bg-muted p-3">
+                    <Mail className="h-5 w-5 text-foreground" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-foreground">Email</h3>
+                    <h3 className="font-medium text-foreground">Email</h3>
                     <a
                       href={`mailto:${company.email}`}
-                      className="mt-1 block text-sm font-medium text-[#0369A1] hover:underline"
+                      className="mt-1 block text-sm text-accent hover:underline"
                     >
                       {company.email}
                     </a>
                   </div>
                 </div>
                 <div className="mt-6 flex items-start gap-4">
-                  <div className="rounded-xl bg-gradient-to-br from-[#F59E0B] to-[#FBBF24] p-3 text-white">
-                    <Clock className="h-5 w-5" />
+                  <div className="rounded-lg bg-muted p-3">
+                    <Clock className="h-5 w-5 text-foreground" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-foreground">Office hours</h3>
+                    <h3 className="font-medium text-foreground">Office hours</h3>
                     <p className="mt-1 text-sm text-muted-foreground">{company.hours}</p>
                   </div>
                 </div>
               </div>
 
-              <div className="card-colorful border-2 border-[#6EE7B7] bg-[#E8FFF5]/50 p-8">
-                <h3 className="font-semibold text-foreground">What happens next</h3>
+              <div className="surface-card border-l-4 border-l-accent p-8">
+                <h3 className="font-medium text-foreground">What happens next</h3>
                 <ol className="mt-4 space-y-3 text-sm text-muted-foreground">
-                  <li className="flex gap-3">
-                    <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#10B981] text-xs font-bold text-white">
-                      1
-                    </span>
-                    We review your submission within one business day.
-                  </li>
-                  <li className="flex gap-3">
-                    <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#0EA5E9] text-xs font-bold text-white">
-                      2
-                    </span>
-                    We schedule a 30-minute discovery call.
-                  </li>
-                  <li className="flex gap-3">
-                    <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#8B5CF6] text-xs font-bold text-white">
-                      3
-                    </span>
-                    You receive a concise view of opportunities and next steps.
-                  </li>
+                  <li>1. We review your submission within one business day.</li>
+                  <li>2. We schedule a 30-minute discovery call.</li>
+                  <li>3. You receive a concise view of opportunities and next steps.</li>
                 </ol>
               </div>
             </aside>

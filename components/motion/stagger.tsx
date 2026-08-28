@@ -24,9 +24,17 @@ export function Stagger({
       className={cn(className)}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: 0.15 }}
-      variants={staggerContainer}
-      transition={{ delay }}
+      viewport={{ once: true, amount: 0.08, margin: "0px 0px -60px 0px" }}
+      variants={{
+        hidden: staggerContainer.hidden,
+        visible: {
+          ...staggerContainer.visible,
+          transition: {
+            staggerChildren: 0.09,
+            delayChildren: 0.08 + delay,
+          },
+        },
+      }}
     >
       {children}
     </motion.div>
@@ -47,7 +55,11 @@ export function StaggerItem({
   }
 
   return (
-    <motion.div className={cn(className)} variants={staggerItem} transition={transition}>
+    <motion.div
+      className={cn(className)}
+      variants={staggerItem}
+      transition={transition}
+    >
       {children}
     </motion.div>
   );

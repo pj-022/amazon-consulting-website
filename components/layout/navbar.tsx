@@ -44,8 +44,9 @@ export function Navbar() {
           )}
         >
           <Link href="/" className="group flex items-center gap-3">
-            <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary text-xs font-bold text-primary-foreground transition-transform duration-300 group-hover:scale-105">
-              VE
+            <span className="relative flex h-9 w-9 items-center justify-center rounded-lg bg-primary text-xs font-bold text-primary-foreground shadow-md transition-transform duration-300 group-hover:scale-105">
+              <span className="absolute -inset-px rounded-lg bg-gradient-to-br from-accent/60 via-transparent to-[#2563EB]/40 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+              <span className="relative">VE</span>
             </span>
             <div className="leading-none">
               <span className="block text-sm font-semibold tracking-tight text-foreground">

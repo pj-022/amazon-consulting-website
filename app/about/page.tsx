@@ -44,11 +44,15 @@ export default function AboutPage() {
         </Container>
       </section>
 
+      <section className="metrics-band">
+        <Container className="py-14">
+          <MetricsStrip />
+        </Container>
+      </section>
+
       <section className="py-20 lg:py-24">
         <Container>
-          <MetricsStrip />
-
-          <div className="mt-20 grid gap-12 lg:grid-cols-[0.9fr_1.1fr]">
+          <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr]">
             <Reveal>
               <SectionHeader
                 eyebrow="Our approach"
@@ -64,7 +68,9 @@ export default function AboutPage() {
                     <div
                       className={cn(
                         "surface-card-interactive border-l-4 p-6",
-                        theme.border
+                        theme.border,
+                        theme.surface,
+                        theme.surfaceBorder
                       )}
                     >
                       <h3 className="text-lg font-medium text-foreground">
@@ -102,7 +108,9 @@ export default function AboutPage() {
                   <div
                     className={cn(
                       "surface-card-interactive h-full border-l-4 p-6",
-                      theme.border
+                      theme.border,
+                      theme.surface,
+                      theme.surfaceBorder
                     )}
                   >
                     <p

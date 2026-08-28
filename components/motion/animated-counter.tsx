@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { motion, useInView, useReducedMotion } from "framer-motion";
 
 function parseMetricValue(value: string) {
@@ -18,59 +18,73 @@ function parseMetricValue(value: string) {
 export function AnimatedCounter({
   value,
   className,
+  startOnMount = false,
 }: {
   value: string;
   className?: string;
+  startOnMount?: boolean;
 }) {
-  const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, amount: 0.6 });
+  const containerRef = useRef<HTMLSpanElement>(null);
+  const scrollInView = useInView(containerRef, { once: true, margin: "-40px" });
+  const [mounted, setMounted] = useState(false);
   const reduceMotion = useReducedMotion();
-  const parsed = parseMetricValue(value);
-  const [display, setDisplay] = useState(parsed?.number ?? 0);
+  const parsed = useMemo(() => parseMetricValue(value), [value]);
+  const [display, setDisplay] = useState<number | null>(null);
+  const hasRun = useRef(false);
 
   useEffect(() => {
-    if (!parsed || !inView || reduceMotion) {
-      if (parsed) setDisplay(parsed.number);
+    setMounted(true);
+  }, []);
+
+  const shouldAnimate = startOnMount ? mounted : scrollInView;
+
+  useEffect(() => {
+    if (!parsed || !shouldAnimate || hasRun.current) return;
+
+    if (reduceMotion) {
+      setDisplay(parsed.number);
+      hasRun.current = true;
       return;
     }
 
-    const duration = 1400;
+    hasRun.current = true;
+    const duration = 1600;
     const start = performance.now();
-    const from = 0;
     const to = parsed.number;
-
     let frame = 0;
+
+    setDisplay(0);
+
     const tick = (now: number) => {
       const progress = Math.min((now - start) / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      setDisplay(from + (to - from) * eased);
-      if (progress < 1) frame = requestAnimationFrame(tick);
+      const eased = 1 - Math.pow(1 - progress, 4);
+      setDisplay(to * eased);
+      if (progress < 1) {
+        frame = requestAnimationFrame(tick);
+      } else {
+        setDisplay(to);
+      }
     };
 
     frame = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(frame);
-  }, [inView, parsed, reduceMotion]);
+  }, [shouldAnimate, value, reduceMotion, parsed]);
 
   if (!parsed) {
     return <span className={className}>{value}</span>;
   }
 
+  const current = display ?? (shouldAnimate ? 0 : parsed.number);
   const formatted =
     parsed.decimals > 0
-      ? display.toFixed(parsed.decimals)
-      : Math.round(display).toString();
+      ? current.toFixed(parsed.decimals)
+      : Math.round(current).toString();
 
   return (
-    <motion.span
-      ref={ref}
-      className={className}
-      initial={{ opacity: 0, y: 8 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.5 }}
-    >
+    <span ref={containerRef} className={className}>
       {parsed.prefix}
       {formatted}
       {parsed.suffix}
-    </motion.span>
+    </span>
   );
 }

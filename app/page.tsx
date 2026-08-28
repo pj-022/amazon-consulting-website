@@ -29,8 +29,8 @@ export default function HomePage() {
         </Container>
       </section>
 
-      <section className="border-b border-border bg-card">
-        <Container className="py-12">
+      <section className="metrics-band">
+        <Container className="py-14">
           <MetricsStrip />
         </Container>
       </section>
@@ -53,7 +53,9 @@ export default function HomePage() {
                     href={`/services#${service.id}`}
                     className={cn(
                       "group surface-card-interactive block border-l-4 p-8",
-                      theme.border
+                      theme.border,
+                      theme.surface,
+                      theme.surfaceBorder
                     )}
                   >
                     <div className="flex items-start justify-between gap-4">

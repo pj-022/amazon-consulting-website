@@ -111,7 +111,7 @@
   }
 
   .eyebrow {
-    @apply text-xs font-semibold uppercase tracking-[0.2em] text-accent;
+    @apply inline-flex items-center rounded-full border border-accent/20 bg-accent/10 px-3.5 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-accent;
   }
 
   .surface-card {
@@ -119,17 +119,39 @@
   }
 
   .surface-card-interactive {
-    @apply rounded-xl border border-border bg-card shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:border-border/80 hover:shadow-lg;
+    @apply rounded-xl border bg-card shadow-sm transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-lg;
   }
 
   .surface-muted {
-    @apply bg-muted/50;
+    background:
+      linear-gradient(180deg, oklch(0.97 0.012 255 / 0.5) 0%, oklch(0.985 0.006 75) 100%);
+  }
+
+  .section-tint-warm {
+    background:
+      radial-gradient(ellipse 80% 60% at 0% 50%, oklch(0.62 0.14 45 / 0.06), transparent 55%),
+      radial-gradient(ellipse 60% 50% at 100% 50%, oklch(0.55 0.08 255 / 0.05), transparent 50%),
+      oklch(0.985 0.006 75);
+  }
+
+  .metrics-band {
+    background:
+      linear-gradient(
+        90deg,
+        oklch(0.97 0.02 255 / 0.7) 0%,
+        oklch(0.99 0.008 75) 35%,
+        oklch(0.99 0.008 75) 65%,
+        oklch(0.97 0.025 300 / 0.5) 100%
+      );
+    border-block: 1px solid oklch(0.91 0.02 255 / 0.6);
   }
 
   .hero-glow {
     background:
-      radial-gradient(ellipse 70% 55% at 85% 15%, oklch(0.62 0.14 45 / 0.09), transparent 55%),
-      radial-gradient(ellipse 50% 40% at 10% 80%, oklch(0.55 0.08 255 / 0.06), transparent 50%);
+      radial-gradient(ellipse 80% 60% at 90% 10%, oklch(0.62 0.14 45 / 0.14), transparent 55%),
+      radial-gradient(ellipse 55% 45% at 5% 85%, oklch(0.55 0.1 255 / 0.1), transparent 50%),
+      radial-gradient(ellipse 40% 35% at 50% 100%, oklch(0.6 0.08 300 / 0.06), transparent 50%),
+      oklch(0.985 0.006 75);
     position: relative;
   }
 
@@ -161,7 +183,7 @@
   }
 
   .tag-pill {
-    @apply rounded-md border border-border bg-card px-3 py-1.5 text-xs font-medium text-muted-foreground transition-all duration-300 hover:border-accent/30 hover:text-foreground;
+    @apply rounded-full border border-border/80 bg-card/90 px-3.5 py-1.5 text-xs font-medium text-muted-foreground shadow-sm backdrop-blur-sm transition-all duration-300 hover:border-accent/35 hover:text-foreground hover:shadow;
   }
 
   .btn-premium {
@@ -234,6 +256,18 @@
     -webkit-mask-composite: xor;
     mask-composite: exclude;
     pointer-events: none;
+  }
+
+  .metric-card {
+    box-shadow:
+      0 1px 2px oklch(0.24 0.035 255 / 0.04),
+      0 4px 16px oklch(0.24 0.035 255 / 0.03);
+  }
+
+  .metric-card:hover {
+    box-shadow:
+      0 4px 8px oklch(0.24 0.035 255 / 0.06),
+      0 12px 28px oklch(0.24 0.035 255 / 0.06);
   }
 
   .dashboard-float {

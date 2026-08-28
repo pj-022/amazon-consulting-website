@@ -84,66 +84,109 @@ export default function Home() {
     <div className="flex flex-col min-h-screen">
       <Navbar />
       
-      <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-28 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-accent/5 -z-10" />
+      <section className="relative pt-32 pb-24 lg:pt-48 lg:pb-32 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-background to-accent/10 -z-10" />
+        <div className="absolute inset-0 -z-10">
+          <div className="absolute top-20 right-10 w-72 h-72 bg-accent/20 rounded-full blur-3xl" />
+          <div className="absolute bottom-20 left-10 w-96 h-96 bg-primary/20 rounded-full blur-3xl" />
+        </div>
+        
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="max-w-4xl mx-auto text-center"
+            className="max-w-5xl mx-auto text-center"
           >
-            <Badge className="mb-6 text-sm px-4 py-2" variant="secondary">
-              Amazon Vendor Central Specialists
-            </Badge>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-primary mb-6 leading-tight">
-              Scale Your Amazon Advertising with{" "}
-              <span className="text-accent">Strategic Precision</span>
-            </h1>
-            <p className="text-xl text-muted-foreground mb-8 leading-relaxed max-w-3xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+            >
+              <Badge className="mb-8 text-sm px-6 py-2.5 bg-primary/10 border-primary/20 hover:bg-primary/20 transition-all" variant="outline">
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-accent rounded-full animate-pulse" />
+                  Amazon Vendor Central Specialists
+                </div>
+              </Badge>
+            </motion.div>
+            
+            <motion.h1 
+              className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold text-primary mb-8 leading-[1.1] tracking-tight"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              Scale Your Amazon
+              <br />
+              Advertising with{" "}
+              <span className="relative inline-block">
+                <span className="relative z-10 bg-gradient-to-r from-accent to-accent/80 bg-clip-text text-transparent">
+                  Strategic Precision
+                </span>
+                <div className="absolute bottom-2 left-0 right-0 h-4 bg-accent/20 -rotate-1 rounded" />
+              </span>
+            </motion.h1>
+            
+            <motion.p 
+              className="text-xl sm:text-2xl text-muted-foreground mb-10 leading-relaxed max-w-3xl mx-auto font-light"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+            >
               Expert technical consulting for Vendor Central advertising programs.
-              Drive ROI through data-driven campaign optimization and strategic
-              oversight.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              Drive exceptional ROI through data-driven campaign optimization.
+            </motion.p>
+            
+            <motion.div 
+              className="flex flex-col sm:flex-row gap-5 justify-center items-center"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+            >
               <Link href="/contact">
                 <Button
                   size="lg"
-                  className="text-lg px-8 py-6 bg-accent hover:bg-accent/90 text-white"
+                  className="text-lg px-10 py-7 bg-gradient-to-r from-accent to-accent/90 hover:from-accent/90 hover:to-accent text-white shadow-xl shadow-accent/25 hover:shadow-2xl hover:shadow-accent/30 transition-all duration-300 group"
                 >
                   Schedule a Strategy Call
-                  <ArrowRight className="ml-2 h-5 w-5" />
+                  <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </Link>
               <Link href="/services">
                 <Button
                   size="lg"
                   variant="outline"
-                  className="text-lg px-8 py-6 border-2"
+                  className="text-lg px-10 py-7 border-2 border-primary/20 hover:border-primary hover:bg-primary/5 transition-all duration-300"
                 >
-                  View Our Services
+                  Explore Services
                 </Button>
               </Link>
-            </div>
+            </motion.div>
           </motion.div>
         </div>
       </section>
 
-      <section className="py-12 bg-primary/5">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+      <section className="py-16 relative">
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-accent/5 to-primary/5" />
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 lg:gap-12">
             {stats.map((stat, index) => (
               <motion.div
                 key={stat.label}
                 initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="text-center"
+                className="text-center group"
               >
-                <div className="text-3xl sm:text-4xl lg:text-5xl font-bold text-accent mb-2">
-                  {stat.value}
+                <div className="relative inline-block mb-3">
+                  <div className="text-4xl sm:text-5xl lg:text-6xl font-bold bg-gradient-to-br from-accent via-accent to-accent/70 bg-clip-text text-transparent group-hover:scale-110 transition-transform duration-300">
+                    {stat.value}
+                  </div>
+                  <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-16 h-1 bg-gradient-to-r from-transparent via-accent to-transparent opacity-50 group-hover:opacity-100 transition-opacity" />
                 </div>
-                <div className="text-sm sm:text-base text-muted-foreground">
+                <div className="text-sm sm:text-base text-muted-foreground font-medium">
                   {stat.label}
                 </div>
               </motion.div>
@@ -152,18 +195,27 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-20 lg:py-28">
+      <section className="py-24 lg:py-32 relative">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-primary mb-4">
+          <motion.div 
+            className="text-center mb-20"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <Badge className="mb-6 bg-accent/10 text-accent border-accent/20" variant="outline">
+              Our Expertise
+            </Badge>
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-primary mb-6 tracking-tight">
               Strategic Advisory Services
             </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+            <p className="text-xl sm:text-2xl text-muted-foreground max-w-3xl mx-auto font-light">
               Comprehensive consulting solutions designed for Amazon Vendor Central
               advertising success
             </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          </motion.div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
             {services.map((service, index) => (
               <motion.div
                 key={service.title}
@@ -173,20 +225,21 @@ export default function Home() {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
               >
                 <Link href={service.href}>
-                  <Card className="h-full hover:shadow-lg transition-shadow cursor-pointer group">
-                    <CardContent className="p-8">
-                      <div className="mb-4 inline-flex p-3 bg-accent/10 rounded-lg group-hover:bg-accent/20 transition-colors">
-                        <service.icon className="h-8 w-8 text-accent" />
+                  <Card className="h-full hover:shadow-2xl hover:shadow-primary/10 transition-all duration-300 cursor-pointer group border-2 hover:border-accent/20 overflow-hidden relative">
+                    <div className="absolute inset-0 bg-gradient-to-br from-accent/0 via-accent/0 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <CardContent className="p-10 relative">
+                      <div className="mb-6 inline-flex p-4 bg-gradient-to-br from-accent/10 to-accent/5 rounded-2xl group-hover:from-accent/20 group-hover:to-accent/10 transition-all duration-300 group-hover:scale-110 group-hover:rotate-3">
+                        <service.icon className="h-10 w-10 text-accent" />
                       </div>
-                      <h3 className="text-2xl font-semibold text-primary mb-3 group-hover:text-accent transition-colors">
+                      <h3 className="text-2xl lg:text-3xl font-bold text-primary mb-4 group-hover:text-accent transition-colors">
                         {service.title}
                       </h3>
-                      <p className="text-muted-foreground leading-relaxed mb-4">
+                      <p className="text-muted-foreground leading-relaxed mb-6 text-lg">
                         {service.description}
                       </p>
-                      <div className="flex items-center text-accent font-medium group-hover:gap-2 transition-all">
+                      <div className="flex items-center text-accent font-semibold group-hover:gap-2 transition-all">
                         Learn more
-                        <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                        <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-2 transition-transform" />
                       </div>
                     </CardContent>
                   </Card>
@@ -197,17 +250,29 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-20 lg:py-28 bg-gradient-to-br from-primary/5 to-accent/5">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-primary mb-4">
+      <section className="py-24 lg:py-32 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-accent/5 to-primary/10" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(255,153,0,0.05),transparent_50%)]" />
+        
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
+          <motion.div 
+            className="text-center mb-20"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <Badge className="mb-6 bg-accent/10 text-accent border-accent/20" variant="outline">
+              Client Success Stories
+            </Badge>
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-primary mb-6 tracking-tight">
               Trusted by Leading Brands
             </h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-xl sm:text-2xl text-muted-foreground max-w-2xl mx-auto font-light">
               See what our clients say about working with VendorEdge
             </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          </motion.div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10">
             {testimonials.map((testimonial, index) => (
               <motion.div
                 key={testimonial.author}
@@ -216,21 +281,28 @@ export default function Home() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
               >
-                <Card className="h-full">
-                  <CardContent className="p-8">
-                    <Quote className="h-10 w-10 text-accent/30 mb-4" />
-                    <p className="text-muted-foreground mb-6 leading-relaxed">
-                      {testimonial.quote}
+                <Card className="h-full bg-white/80 backdrop-blur-sm hover:bg-white transition-all duration-300 border-2 hover:border-accent/20 hover:shadow-2xl hover:shadow-accent/10 group">
+                  <CardContent className="p-8 lg:p-10">
+                    <div className="mb-6 inline-flex p-3 bg-accent/10 rounded-full group-hover:bg-accent/20 transition-colors">
+                      <Quote className="h-8 w-8 text-accent" />
+                    </div>
+                    <p className="text-muted-foreground mb-8 leading-relaxed text-lg italic">
+                      "{testimonial.quote}"
                     </p>
-                    <div>
-                      <div className="font-semibold text-primary">
-                        {testimonial.author}
+                    <div className="flex items-start gap-4">
+                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-accent to-accent/70 flex items-center justify-center text-white font-bold text-lg">
+                        {testimonial.author.charAt(0)}
                       </div>
-                      <div className="text-sm text-muted-foreground">
-                        {testimonial.role}
-                      </div>
-                      <div className="text-sm text-accent font-medium">
-                        {testimonial.company}
+                      <div>
+                        <div className="font-bold text-primary text-lg">
+                          {testimonial.author}
+                        </div>
+                        <div className="text-sm text-muted-foreground mb-1">
+                          {testimonial.role}
+                        </div>
+                        <div className="text-sm text-accent font-semibold">
+                          {testimonial.company}
+                        </div>
                       </div>
                     </div>
                   </CardContent>
@@ -241,39 +313,55 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-20 lg:py-28">
+      <section className="py-24 lg:py-32">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <Card className="bg-gradient-to-br from-primary to-primary/90 text-white overflow-hidden">
-            <CardContent className="p-12 lg:p-16 relative">
-              <div className="absolute top-0 right-0 w-64 h-64 bg-accent/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl" />
-              <div className="relative z-10 max-w-3xl">
-                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
-                  Ready to Optimize Your Amazon Advertising?
-                </h2>
-                <p className="text-xl text-white/90 mb-8">
-                  Schedule a free consultation to discuss your advertising goals and
-                  discover how we can help drive measurable growth.
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <Link href="/contact">
-                    <Button
-                      size="lg"
-                      className="text-lg px-8 py-6 bg-accent hover:bg-accent/90 text-white"
-                    >
-                      Get Started Today
-                      <ArrowRight className="ml-2 h-5 w-5" />
-                    </Button>
-                  </Link>
-                  <Link href="/case-studies">
-                    <Button
-                      size="lg"
-                      variant="outline"
-                      className="text-lg px-8 py-6 bg-white text-primary hover:bg-white/90 border-2"
-                    >
-                      View Case Studies
-                    </Button>
-                  </Link>
-                </div>
+          <Card className="relative overflow-hidden border-0 shadow-2xl">
+            <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary/95 to-primary/90" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(255,153,0,0.15),transparent_50%)]" />
+            <div className="absolute top-0 right-0 w-96 h-96 bg-accent/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl" />
+            <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent/10 rounded-full translate-y-1/2 -translate-x-1/2 blur-3xl" />
+            
+            <CardContent className="relative p-12 lg:p-20 text-white">
+              <div className="max-w-4xl mx-auto text-center">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6 }}
+                >
+                  <Badge className="mb-8 bg-white/10 text-white border-white/20 backdrop-blur-sm" variant="outline">
+                    Free Consultation
+                  </Badge>
+                  <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-8 leading-tight">
+                    Ready to Optimize Your
+                    <br />
+                    Amazon Advertising?
+                  </h2>
+                  <p className="text-xl sm:text-2xl text-white/90 mb-12 font-light leading-relaxed">
+                    Schedule a free consultation to discuss your advertising goals and
+                    discover how we can help drive measurable growth.
+                  </p>
+                  <div className="flex flex-col sm:flex-row gap-5 justify-center items-center">
+                    <Link href="/contact">
+                      <Button
+                        size="lg"
+                        className="text-lg px-10 py-7 bg-accent hover:bg-accent/90 text-white shadow-2xl hover:shadow-accent/50 transition-all duration-300 group"
+                      >
+                        Get Started Today
+                        <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                      </Button>
+                    </Link>
+                    <Link href="/case-studies">
+                      <Button
+                        size="lg"
+                        variant="outline"
+                        className="text-lg px-10 py-7 bg-white text-primary hover:bg-white/90 border-2 border-white hover:scale-105 transition-all duration-300"
+                      >
+                        View Case Studies
+                      </Button>
+                    </Link>
+                  </div>
+                </motion.div>
               </div>
             </CardContent>
           </Card>

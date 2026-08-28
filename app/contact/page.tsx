@@ -69,21 +69,31 @@ export default function ContactPage() {
     <div className="flex flex-col min-h-screen">
       <Navbar />
       
-      <section className="pt-32 pb-16 lg:pt-40 lg:pb-20 bg-gradient-to-br from-primary/5 via-background to-accent/5">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="pt-32 pb-16 lg:pt-40 lg:pb-20 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-accent/5" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,153,0,0.08),transparent_50%)]" />
+        
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto text-center"
           >
-            <Badge className="mb-6 text-sm px-4 py-2" variant="secondary">
-              Get In Touch
+            <Badge className="mb-8 text-sm px-6 py-2.5 bg-accent/10 text-accent border-accent/20" variant="outline">
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 bg-accent rounded-full animate-pulse" />
+                Get In Touch
+              </div>
             </Badge>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-primary mb-6 leading-tight">
-              Let's Discuss Your Amazon Advertising Goals
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-primary mb-8 leading-tight tracking-tight">
+              Let's Discuss Your
+              <br />
+              <span className="bg-gradient-to-r from-accent to-accent/80 bg-clip-text text-transparent">
+                Amazon Advertising Goals
+              </span>
             </h1>
-            <p className="text-xl text-muted-foreground leading-relaxed">
+            <p className="text-xl sm:text-2xl text-muted-foreground leading-relaxed font-light">
               Schedule a free consultation to explore how we can help optimize your
               Vendor Central advertising program.
             </p>
@@ -95,11 +105,16 @@ export default function ContactPage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
             <div className="lg:col-span-2">
-              <Card>
+              <Card className="border-2 shadow-xl">
                 <CardContent className="p-8 lg:p-12">
-                  <h2 className="text-2xl font-bold text-primary mb-6">
-                    Send Us a Message
-                  </h2>
+                  <div className="mb-8">
+                    <h2 className="text-3xl font-bold text-primary mb-3">
+                      Send Us a Message
+                    </h2>
+                    <p className="text-muted-foreground text-lg">
+                      Fill out the form below and we'll get back to you within 24 hours.
+                    </p>
+                  </div>
 
                   {submitSuccess && (
                     <motion.div
@@ -234,7 +249,7 @@ export default function ContactPage() {
                     <Button
                       type="submit"
                       size="lg"
-                      className="w-full bg-accent hover:bg-accent/90 text-white font-semibold"
+                      className="w-full bg-gradient-to-r from-accent to-accent/90 hover:from-accent/90 hover:to-accent text-white font-semibold shadow-lg shadow-accent/25 hover:shadow-xl hover:shadow-accent/30 transition-all duration-300 py-6"
                       disabled={isSubmitting}
                     >
                       {isSubmitting ? (
@@ -251,18 +266,18 @@ export default function ContactPage() {
               </Card>
             </div>
 
-            <div className="space-y-8">
-              <Card>
+            <div className="space-y-6">
+              <Card className="border-2 hover:border-accent/20 transition-colors shadow-lg">
                 <CardContent className="p-8">
                   <div className="flex items-start mb-6">
-                    <div className="p-3 bg-accent/10 rounded-lg mr-4">
-                      <Mail className="h-6 w-6 text-accent" />
+                    <div className="p-4 bg-gradient-to-br from-accent/10 to-accent/5 rounded-2xl mr-4">
+                      <Mail className="h-7 w-7 text-accent" />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-primary mb-2">Email Us</h3>
+                      <h3 className="font-bold text-primary mb-2 text-lg">Email Us</h3>
                       <a
                         href="mailto:hello@vendoredge.com"
-                        className="text-muted-foreground hover:text-accent transition-colors"
+                        className="text-muted-foreground hover:text-accent transition-colors text-lg"
                       >
                         hello@vendoredge.com
                       </a>
@@ -270,14 +285,14 @@ export default function ContactPage() {
                   </div>
 
                   <div className="flex items-start">
-                    <div className="p-3 bg-accent/10 rounded-lg mr-4">
-                      <Clock className="h-6 w-6 text-accent" />
+                    <div className="p-4 bg-gradient-to-br from-accent/10 to-accent/5 rounded-2xl mr-4">
+                      <Clock className="h-7 w-7 text-accent" />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-primary mb-2">
+                      <h3 className="font-bold text-primary mb-2 text-lg">
                         Office Hours
                       </h3>
-                      <p className="text-muted-foreground text-sm">
+                      <p className="text-muted-foreground">
                         Monday - Friday
                         <br />
                         9 AM - 6 PM EST
@@ -287,27 +302,35 @@ export default function ContactPage() {
                 </CardContent>
               </Card>
 
-              <Card className="bg-gradient-to-br from-primary/5 to-accent/5">
+              <Card className="bg-gradient-to-br from-primary/5 to-accent/5 border-2 border-primary/10 shadow-lg">
                 <CardContent className="p-8">
-                  <h3 className="font-semibold text-primary mb-4">
+                  <h3 className="font-bold text-primary mb-6 text-xl">
                     What to Expect
                   </h3>
-                  <ul className="space-y-3 text-sm text-muted-foreground">
+                  <ul className="space-y-4 text-muted-foreground">
                     <li className="flex items-start">
-                      <CheckCircle2 className="h-5 w-5 text-accent mr-2 flex-shrink-0 mt-0.5" />
-                      <span>Response within 24 hours</span>
+                      <div className="p-1 bg-accent/20 rounded-full mr-3 mt-1">
+                        <CheckCircle2 className="h-4 w-4 text-accent" />
+                      </div>
+                      <span className="text-base">Response within 24 hours</span>
                     </li>
                     <li className="flex items-start">
-                      <CheckCircle2 className="h-5 w-5 text-accent mr-2 flex-shrink-0 mt-0.5" />
-                      <span>Free initial consultation</span>
+                      <div className="p-1 bg-accent/20 rounded-full mr-3 mt-1">
+                        <CheckCircle2 className="h-4 w-4 text-accent" />
+                      </div>
+                      <span className="text-base">Free initial consultation</span>
                     </li>
                     <li className="flex items-start">
-                      <CheckCircle2 className="h-5 w-5 text-accent mr-2 flex-shrink-0 mt-0.5" />
-                      <span>No obligation or commitments</span>
+                      <div className="p-1 bg-accent/20 rounded-full mr-3 mt-1">
+                        <CheckCircle2 className="h-4 w-4 text-accent" />
+                      </div>
+                      <span className="text-base">No obligation or commitments</span>
                     </li>
                     <li className="flex items-start">
-                      <CheckCircle2 className="h-5 w-5 text-accent mr-2 flex-shrink-0 mt-0.5" />
-                      <span>Tailored recommendations</span>
+                      <div className="p-1 bg-accent/20 rounded-full mr-3 mt-1">
+                        <CheckCircle2 className="h-4 w-4 text-accent" />
+                      </div>
+                      <span className="text-base">Tailored recommendations</span>
                     </li>
                   </ul>
                 </CardContent>

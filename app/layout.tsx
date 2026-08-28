@@ -1,22 +1,40 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Newsreader } from "next/font/google";
 import "./globals.css";
+import { Navbar } from "@/components/layout/navbar";
+import { Footer } from "@/components/layout/footer";
 
 const inter = Inter({
   variable: "--font-sans",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "600"],
+});
+
+const newsreader = Newsreader({
+  variable: "--font-serif",
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
 });
 
 export const metadata: Metadata = {
   title: "Amazon Advertising Consulting | Vendor Central Experts - VendorEdge",
-  description: "Strategic Amazon advertising consulting for Vendor Central. Campaign optimization, budget planning, and performance audits for Sponsored Products, Brands & Display.",
-  keywords: ["Amazon Advertising", "Vendor Central", "Amazon Consulting", "Sponsored Products", "Sponsored Brands", "Sponsored Display", "ROAS Optimization"],
+  description:
+    "Strategic Amazon advertising consulting for Vendor Central. Campaign optimization, budget planning, and performance audits for Sponsored Products, Brands & Display.",
+  keywords: [
+    "Amazon Advertising",
+    "Vendor Central",
+    "Amazon Consulting",
+    "Sponsored Products",
+    "Sponsored Brands",
+    "Sponsored Display",
+    "ROAS Optimization",
+  ],
   authors: [{ name: "VendorEdge Consulting" }],
-  metadataBase: new URL('https://vendoredge.com'),
+  metadataBase: new URL("https://vendoredge.com"),
   openGraph: {
     title: "Amazon Advertising Consulting | Vendor Central Experts",
-    description: "Strategic Amazon advertising consulting for Vendor Central. Drive ROI through data-driven campaign optimization.",
+    description:
+      "Strategic Amazon advertising consulting for Vendor Central. Drive ROI through data-driven campaign optimization.",
     type: "website",
     locale: "en_US",
     siteName: "VendorEdge Consulting",
@@ -24,7 +42,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Amazon Advertising Consulting | Vendor Central Experts",
-    description: "Strategic Amazon advertising consulting for Vendor Central. Drive ROI through data-driven campaign optimization.",
+    description:
+      "Strategic Amazon advertising consulting for Vendor Central. Drive ROI through data-driven campaign optimization.",
   },
 };
 
@@ -32,7 +51,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${inter.variable} h-full antialiased`}
+      className={`${inter.variable} ${newsreader.variable} h-full antialiased`}
     >
       <head>
         <script
@@ -42,9 +61,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
               "@context": "https://schema.org",
               "@type": "ProfessionalService",
               name: "VendorEdge Consulting",
-              description: "Strategic Amazon advertising consulting for Vendor Central",
+              description:
+                "Strategic Amazon advertising consulting for Vendor Central",
               url: "https://vendoredge.com",
-              telephone: "+1-XXX-XXX-XXXX",
               email: "hello@vendoredge.com",
               address: {
                 "@type": "PostalAddress",
@@ -64,7 +83,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           }}
         />
       </head>
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col font-sans">
+        <Navbar />
+        <main className="flex-1">{children}</main>
+        <Footer />
+      </body>
     </html>
   );
 }

@@ -1,110 +1,100 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu, X } from "lucide-react";
-
-const navItems = [
-  { href: "/", label: "Home" },
-  { href: "/services", label: "Services" },
-  { href: "/about", label: "About" },
-  { href: "/case-studies", label: "Case Studies" },
-  { href: "/contact", label: "Contact" },
-];
+import { usePathname } from "next/navigation";
+import { useState } from "react";
+import { Menu } from "lucide-react";
+import { buttonVariants } from "@/components/ui/button";
+import { Sheet, SheetContent } from "@/components/ui/sheet";
+import { Container } from "@/components/sections/container";
+import { company, navItems } from "@/lib/site-data";
+import { cn } from "@/lib/utils";
 
 export function Navbar() {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  const pathname = usePathname();
+  const [open, setOpen] = useState(false);
 
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        isScrolled
-          ? "bg-white/95 backdrop-blur-xl shadow-lg shadow-primary/5 border-b border-primary/10"
-          : "bg-transparent"
-      }`}
-    >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20 lg:h-24">
-          <Link href="/" className="flex items-center space-x-2 group">
-            <div className="flex items-center">
-              <div className="relative">
-                <span className="text-3xl font-bold bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent group-hover:from-accent group-hover:to-accent/80 transition-all duration-300">
-                  VendorEdge
-                </span>
-                <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent group-hover:w-full transition-all duration-300" />
-              </div>
+    <header className="sticky top-0 z-50 border-b border-border/80 bg-background/90 backdrop-blur-md">
+      <Container>
+        <div className="flex h-16 items-center justify-between lg:h-[4.5rem]">
+          <Link href="/" className="group flex items-center gap-3">
+            <span className="flex h-8 w-8 items-center justify-center rounded-md bg-primary text-xs font-semibold text-primary-foreground">
+              VE
+            </span>
+            <div className="leading-none">
+              <span className="block text-sm font-semibold tracking-tight text-foreground">
+                {company.name}
+              </span>
+              <span className="hidden text-[11px] text-muted-foreground sm:block">
+                Vendor Central Advisory
+              </span>
             </div>
           </Link>
 
-          <div className="hidden lg:flex items-center space-x-2">
-            {navItems.map((item) => (
-              <Link key={item.href} href={item.href}>
-                <Button
-                  variant="ghost"
-                  className="text-base font-medium hover:text-accent transition-colors relative group px-4 py-2"
+          <nav className="hidden items-center gap-1 lg:flex">
+            {navItems.map((item) => {
+              const active = pathname === item.href;
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={cn(
+                    "rounded-md px-3 py-2 text-sm font-medium transition-colors",
+                    active
+                      ? "bg-muted text-foreground"
+                      : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                  )}
                 >
                   {item.label}
-                  <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-accent group-hover:w-3/4 transition-all duration-300" />
-                </Button>
-              </Link>
-            ))}
-          </div>
+                </Link>
+              );
+            })}
+          </nav>
 
           <div className="hidden lg:block">
-            <Link href="/contact">
-              <Button
-                size="lg"
-                className="bg-gradient-to-r from-accent to-accent/90 hover:from-accent/90 hover:to-accent text-white font-semibold shadow-lg shadow-accent/25 hover:shadow-xl hover:shadow-accent/30 transition-all duration-300 px-8"
-              >
-                Get Started
-              </Button>
+            <Link
+              href="/contact"
+              className={buttonVariants({ className: "h-9 px-4" })}
+            >
+              Book a consultation
             </Link>
           </div>
 
-          <Sheet open={isOpen} onOpenChange={setIsOpen}>
-            <button
-              onClick={() => setIsOpen(true)}
-              className="inline-flex items-center justify-center rounded-lg p-2.5 text-muted-foreground hover:bg-primary/5 hover:text-primary transition-colors lg:hidden"
-              aria-label="Open menu"
-            >
-              <Menu className="h-6 w-6" />
-            </button>
-            <SheetContent side="right" className="w-[300px] sm:w-[400px]">
-              <nav className="flex flex-col space-y-4 mt-8">
-                {navItems.map((item) => (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    onClick={() => setIsOpen(false)}
-                    className="text-lg font-medium hover:text-accent transition-colors py-3 px-2 rounded-lg hover:bg-accent/5"
-                  >
-                    {item.label}
-                  </Link>
-                ))}
-                <Link href="/contact" onClick={() => setIsOpen(false)}>
-                  <Button
-                    size="lg"
-                    className="w-full bg-gradient-to-r from-accent to-accent/90 hover:from-accent/90 hover:to-accent text-white font-semibold mt-4 shadow-lg"
-                  >
-                    Get Started
-                  </Button>
-                </Link>
-              </nav>
-            </SheetContent>
-          </Sheet>
+          <button
+            type="button"
+            onClick={() => setOpen(true)}
+            className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-border text-foreground lg:hidden"
+            aria-label="Open menu"
+          >
+            <Menu className="h-4 w-4" />
+          </button>
         </div>
-      </div>
-    </nav>
+      </Container>
+
+      <Sheet open={open} onOpenChange={setOpen}>
+        <SheetContent side="right" className="w-[min(100vw-2rem,24rem)] p-6">
+          <div className="mt-8 flex flex-col gap-1">
+            {navItems.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={() => setOpen(false)}
+                className="rounded-md px-3 py-3 text-base font-medium text-foreground hover:bg-muted"
+              >
+                {item.label}
+              </Link>
+            ))}
+            <Link
+              href="/contact"
+              onClick={() => setOpen(false)}
+              className={buttonVariants({ className: "mt-4 h-11" })}
+            >
+              Book a consultation
+            </Link>
+          </div>
+        </SheetContent>
+      </Sheet>
+    </header>
   );
 }

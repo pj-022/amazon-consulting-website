@@ -1,74 +1,44 @@
 import Link from "next/link";
-import { Separator } from "@/components/ui/separator";
-import { Mail, ExternalLink } from "lucide-react";
-
-const footerLinks = {
-  services: [
-    { label: "Campaign Strategy", href: "/services#strategy" },
-    { label: "Budget Allocation", href: "/services#budget" },
-    { label: "Performance Audits", href: "/services#audits" },
-    { label: "Reporting & Analytics", href: "/services#reporting" },
-  ],
-  company: [
-    { label: "About Us", href: "/about" },
-    { label: "Case Studies", href: "/case-studies" },
-    { label: "Contact", href: "/contact" },
-  ],
-  resources: [
-    { label: "Services Overview", href: "/services" },
-    { label: "Our Process", href: "/about#process" },
-  ],
-};
+import { Container } from "@/components/sections/container";
+import { company, navItems, services } from "@/lib/site-data";
 
 export function Footer() {
   return (
-    <footer className="bg-gradient-to-br from-primary via-primary/98 to-primary/95 text-white mt-auto relative overflow-hidden">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(255,153,0,0.1),transparent_50%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_80%,rgba(255,153,0,0.05),transparent_50%)]" />
-      
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20 relative">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-16">
-          <div className="lg:col-span-2">
-            <Link href="/" className="inline-block mb-6 group">
-              <span className="text-3xl font-bold text-white group-hover:text-accent transition-colors">
-                VendorEdge
+    <footer className="border-t border-border bg-primary text-primary-foreground">
+      <Container className="py-16">
+        <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
+          <div>
+            <div className="flex items-center gap-3">
+              <span className="flex h-8 w-8 items-center justify-center rounded-md bg-white/10 text-xs font-semibold">
+                VE
               </span>
-            </Link>
-            <p className="text-white/80 mb-8 max-w-md text-lg leading-relaxed">
-              Expert Amazon Advertising consulting for Vendor Central. Drive ROI
-              through strategic campaign optimization and data-driven insights.
-            </p>
-            <div className="flex space-x-4">
-              <a
-                href="mailto:hello@vendoredge.com"
-                className="p-3 bg-white/10 rounded-full hover:bg-accent transition-all duration-300 hover:scale-110"
-                aria-label="Email"
-              >
-                <Mail className="h-5 w-5" />
-              </a>
-              <a
-                href="https://linkedin.com/company/vendoredge"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-3 bg-white/10 rounded-full hover:bg-accent transition-all duration-300 hover:scale-110"
-                aria-label="LinkedIn"
-              >
-                <ExternalLink className="h-5 w-5" />
-              </a>
+              <span className="text-lg font-semibold">{company.name}</span>
             </div>
+            <p className="mt-4 max-w-sm text-sm leading-relaxed text-primary-foreground/75">
+              Strategic advisory for Amazon Vendor Central advertising programs.
+              Campaign architecture, budget planning, audits, and executive
+              reporting for 1P brands.
+            </p>
+            <a
+              href={`mailto:${company.email}`}
+              className="mt-5 inline-block text-sm font-medium text-white hover:underline"
+            >
+              {company.email}
+            </a>
           </div>
 
           <div>
-            <h3 className="font-bold text-lg mb-6 text-white/90">Services</h3>
-            <ul className="space-y-4">
-              {footerLinks.services.map((link) => (
-                <li key={link.href}>
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary-foreground/55">
+              Company
+            </p>
+            <ul className="mt-4 space-y-3">
+              {navItems.map((item) => (
+                <li key={item.href}>
                   <Link
-                    href={link.href}
-                    className="text-white/70 hover:text-accent transition-colors flex items-center group"
+                    href={item.href}
+                    className="text-sm text-primary-foreground/75 transition-colors hover:text-white"
                   >
-                    <span className="w-0 h-0.5 bg-accent mr-0 group-hover:w-4 group-hover:mr-2 transition-all duration-300" />
-                    {link.label}
+                    {item.label}
                   </Link>
                 </li>
               ))}
@@ -76,16 +46,17 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="font-bold text-lg mb-6 text-white/90">Company</h3>
-            <ul className="space-y-4">
-              {footerLinks.company.map((link) => (
-                <li key={link.href}>
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary-foreground/55">
+              Services
+            </p>
+            <ul className="mt-4 space-y-3">
+              {services.map((service) => (
+                <li key={service.id}>
                   <Link
-                    href={link.href}
-                    className="text-white/70 hover:text-accent transition-colors flex items-center group"
+                    href={`/services#${service.id}`}
+                    className="text-sm text-primary-foreground/75 transition-colors hover:text-white"
                   >
-                    <span className="w-0 h-0.5 bg-accent mr-0 group-hover:w-4 group-hover:mr-2 transition-all duration-300" />
-                    {link.label}
+                    {service.title}
                   </Link>
                 </li>
               ))}
@@ -93,46 +64,30 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="font-bold text-lg mb-6 text-white/90">Resources</h3>
-            <ul className="space-y-4">
-              {footerLinks.resources.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-white/70 hover:text-accent transition-colors flex items-center group"
-                  >
-                    <span className="w-0 h-0.5 bg-accent mr-0 group-hover:w-4 group-hover:mr-2 transition-all duration-300" />
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary-foreground/55">
+              Coverage
+            </p>
+            <ul className="mt-4 space-y-3 text-sm text-primary-foreground/75">
+              <li>Sponsored Products</li>
+              <li>Sponsored Brands</li>
+              <li>Sponsored Display</li>
+              <li>US Vendor Central (1P)</li>
             </ul>
           </div>
         </div>
 
-        <Separator className="my-10 bg-white/20" />
-
-        <div className="flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
-          <p className="text-white/60 text-sm">
-            © {new Date().getFullYear()} VendorEdge Consulting. All rights
-            reserved.
-          </p>
-          <div className="flex space-x-8 text-sm">
-            <Link
-              href="/privacy"
-              className="text-white/60 hover:text-accent transition-colors"
-            >
-              Privacy Policy
+        <div className="mt-12 flex flex-col gap-4 border-t border-white/10 pt-8 text-sm text-primary-foreground/60 sm:flex-row sm:items-center sm:justify-between">
+          <p>© {new Date().getFullYear()} {company.name}. All rights reserved.</p>
+          <div className="flex gap-6">
+            <Link href="/privacy" className="hover:text-white">
+              Privacy
             </Link>
-            <Link
-              href="/terms"
-              className="text-white/60 hover:text-accent transition-colors"
-            >
-              Terms of Service
+            <Link href="/terms" className="hover:text-white">
+              Terms
             </Link>
           </div>
         </div>
-      </div>
+      </Container>
     </footer>
   );
 }

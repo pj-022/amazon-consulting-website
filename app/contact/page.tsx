@@ -3,8 +3,8 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { CheckCircle2, Loader2, Mail, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import {
@@ -14,11 +14,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Badge } from "@/components/ui/badge";
-import { Mail, Clock, CheckCircle2, Loader2 } from "lucide-react";
-import { motion } from "framer-motion";
-import { Navbar } from "@/components/layout/navbar";
-import { Footer } from "@/components/layout/footer";
+import { Container } from "@/components/sections/container";
+import { company } from "@/lib/site-data";
 import { contactFormSchema, type ContactFormData } from "@/lib/validations";
 
 export default function ContactPage() {
@@ -30,8 +27,8 @@ export default function ContactPage() {
     register,
     handleSubmit,
     setValue,
-    formState: { errors },
     reset,
+    formState: { errors },
   } = useForm<ContactFormData>({
     resolver: zodResolver(contactFormSchema),
   });
@@ -43,22 +40,18 @@ export default function ContactPage() {
     try {
       const response = await fetch("/api/contact", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
 
-      if (!response.ok) {
-        throw new Error("Failed to submit form");
-      }
+      if (!response.ok) throw new Error("Failed to submit");
 
       setSubmitSuccess(true);
       reset();
       setTimeout(() => setSubmitSuccess(false), 5000);
-    } catch (error) {
+    } catch {
       setSubmitError(
-        "There was an error submitting your message. Please try again or email us directly."
+        "There was an error submitting your message. Please email us directly."
       );
     } finally {
       setIsSubmitting(false);
@@ -66,281 +59,181 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen">
-      <Navbar />
-      
-      <section className="pt-32 pb-16 lg:pt-40 lg:pb-20 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-accent/5" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,153,0,0.08),transparent_50%)]" />
-        
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="max-w-4xl mx-auto text-center"
-          >
-            <Badge className="mb-8 text-sm px-6 py-2.5 bg-accent/10 text-accent border-accent/20" variant="outline">
-              <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-accent rounded-full animate-pulse" />
-                Get In Touch
-              </div>
-            </Badge>
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-primary mb-8 leading-tight tracking-tight">
-              Let's Discuss Your
-              <br />
-              <span className="bg-gradient-to-r from-accent to-accent/80 bg-clip-text text-transparent">
-                Amazon Advertising Goals
-              </span>
-            </h1>
-            <p className="text-xl sm:text-2xl text-muted-foreground leading-relaxed font-light">
-              Schedule a free consultation to explore how we can help optimize your
-              Vendor Central advertising program.
+    <>
+      <section className="border-b border-border bg-muted/30">
+        <Container className="py-20 lg:py-24">
+          <div className="max-w-3xl">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
+              Contact
             </p>
-          </motion.div>
-        </div>
-      </section>
-
-      <section className="py-20 lg:py-28">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-            <div className="lg:col-span-2">
-              <Card className="border-2 shadow-xl">
-                <CardContent className="p-8 lg:p-12">
-                  <div className="mb-8">
-                    <h2 className="text-3xl font-bold text-primary mb-3">
-                      Send Us a Message
-                    </h2>
-                    <p className="text-muted-foreground text-lg">
-                      Fill out the form below and we'll get back to you within 24 hours.
-                    </p>
-                  </div>
-
-                  {submitSuccess && (
-                    <motion.div
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg flex items-start"
-                    >
-                      <CheckCircle2 className="h-5 w-5 text-green-600 mr-3 flex-shrink-0 mt-0.5" />
-                      <div>
-                        <p className="font-semibold text-green-900">
-                          Message sent successfully!
-                        </p>
-                        <p className="text-sm text-green-700">
-                          We'll get back to you within 24 hours.
-                        </p>
-                      </div>
-                    </motion.div>
-                  )}
-
-                  {submitError && (
-                    <motion.div
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg"
-                    >
-                      <p className="text-sm text-red-700">{submitError}</p>
-                    </motion.div>
-                  )}
-
-                  <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-                    <div>
-                      <label
-                        htmlFor="name"
-                        className="block text-sm font-medium text-primary mb-2"
-                      >
-                        Name *
-                      </label>
-                      <Input
-                        id="name"
-                        {...register("name")}
-                        placeholder="John Smith"
-                        className="w-full"
-                      />
-                      {errors.name && (
-                        <p className="mt-1 text-sm text-red-600">
-                          {errors.name.message}
-                        </p>
-                      )}
-                    </div>
-
-                    <div>
-                      <label
-                        htmlFor="email"
-                        className="block text-sm font-medium text-primary mb-2"
-                      >
-                        Email *
-                      </label>
-                      <Input
-                        id="email"
-                        type="email"
-                        {...register("email")}
-                        placeholder="john@company.com"
-                        className="w-full"
-                      />
-                      {errors.email && (
-                        <p className="mt-1 text-sm text-red-600">
-                          {errors.email.message}
-                        </p>
-                      )}
-                    </div>
-
-                    <div>
-                      <label
-                        htmlFor="company"
-                        className="block text-sm font-medium text-primary mb-2"
-                      >
-                        Company
-                      </label>
-                      <Input
-                        id="company"
-                        {...register("company")}
-                        placeholder="Your Company Name"
-                        className="w-full"
-                      />
-                    </div>
-
-                    <div>
-                      <label
-                        htmlFor="adSpend"
-                        className="block text-sm font-medium text-primary mb-2"
-                      >
-                        Current Monthly Ad Spend *
-                      </label>
-                      <Select onValueChange={(value: string | null) => value && setValue("adSpend", value)}>
-                        <SelectTrigger className="w-full">
-                          <SelectValue placeholder="Select your monthly ad spend" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="under-10k">Less than $10K</SelectItem>
-                          <SelectItem value="10k-50k">$10K - $50K</SelectItem>
-                          <SelectItem value="50k-100k">$50K - $100K</SelectItem>
-                          <SelectItem value="100k-plus">$100K+</SelectItem>
-                        </SelectContent>
-                      </Select>
-                      {errors.adSpend && (
-                        <p className="mt-1 text-sm text-red-600">
-                          {errors.adSpend.message}
-                        </p>
-                      )}
-                    </div>
-
-                    <div>
-                      <label
-                        htmlFor="message"
-                        className="block text-sm font-medium text-primary mb-2"
-                      >
-                        Message *
-                      </label>
-                      <Textarea
-                        id="message"
-                        {...register("message")}
-                        placeholder="Tell us about your advertising goals and challenges..."
-                        className="w-full min-h-[150px]"
-                      />
-                      {errors.message && (
-                        <p className="mt-1 text-sm text-red-600">
-                          {errors.message.message}
-                        </p>
-                      )}
-                    </div>
-
-                    <Button
-                      type="submit"
-                      size="lg"
-                      className="w-full bg-gradient-to-r from-accent to-accent/90 hover:from-accent/90 hover:to-accent text-white font-semibold shadow-lg shadow-accent/25 hover:shadow-xl hover:shadow-accent/30 transition-all duration-300 py-6"
-                      disabled={isSubmitting}
-                    >
-                      {isSubmitting ? (
-                        <>
-                          <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                          Sending...
-                        </>
-                      ) : (
-                        "Send Message"
-                      )}
-                    </Button>
-                  </form>
-                </CardContent>
-              </Card>
-            </div>
-
-            <div className="space-y-6">
-              <Card className="border-2 hover:border-accent/20 transition-colors shadow-lg">
-                <CardContent className="p-8">
-                  <div className="flex items-start mb-6">
-                    <div className="p-4 bg-gradient-to-br from-accent/10 to-accent/5 rounded-2xl mr-4">
-                      <Mail className="h-7 w-7 text-accent" />
-                    </div>
-                    <div>
-                      <h3 className="font-bold text-primary mb-2 text-lg">Email Us</h3>
-                      <a
-                        href="mailto:hello@vendoredge.com"
-                        className="text-muted-foreground hover:text-accent transition-colors text-lg"
-                      >
-                        hello@vendoredge.com
-                      </a>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start">
-                    <div className="p-4 bg-gradient-to-br from-accent/10 to-accent/5 rounded-2xl mr-4">
-                      <Clock className="h-7 w-7 text-accent" />
-                    </div>
-                    <div>
-                      <h3 className="font-bold text-primary mb-2 text-lg">
-                        Office Hours
-                      </h3>
-                      <p className="text-muted-foreground">
-                        Monday - Friday
-                        <br />
-                        9 AM - 6 PM EST
-                      </p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card className="bg-gradient-to-br from-primary/5 to-accent/5 border-2 border-primary/10 shadow-lg">
-                <CardContent className="p-8">
-                  <h3 className="font-bold text-primary mb-6 text-xl">
-                    What to Expect
-                  </h3>
-                  <ul className="space-y-4 text-muted-foreground">
-                    <li className="flex items-start">
-                      <div className="p-1 bg-accent/20 rounded-full mr-3 mt-1">
-                        <CheckCircle2 className="h-4 w-4 text-accent" />
-                      </div>
-                      <span className="text-base">Response within 24 hours</span>
-                    </li>
-                    <li className="flex items-start">
-                      <div className="p-1 bg-accent/20 rounded-full mr-3 mt-1">
-                        <CheckCircle2 className="h-4 w-4 text-accent" />
-                      </div>
-                      <span className="text-base">Free initial consultation</span>
-                    </li>
-                    <li className="flex items-start">
-                      <div className="p-1 bg-accent/20 rounded-full mr-3 mt-1">
-                        <CheckCircle2 className="h-4 w-4 text-accent" />
-                      </div>
-                      <span className="text-base">No obligation or commitments</span>
-                    </li>
-                    <li className="flex items-start">
-                      <div className="p-1 bg-accent/20 rounded-full mr-3 mt-1">
-                        <CheckCircle2 className="h-4 w-4 text-accent" />
-                      </div>
-                      <span className="text-base">Tailored recommendations</span>
-                    </li>
-                  </ul>
-                </CardContent>
-              </Card>
-            </div>
+            <h1 className="mt-5 text-4xl font-medium tracking-tight text-foreground sm:text-5xl lg:text-6xl">
+              Start with a focused conversation about your program
+            </h1>
+            <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
+              Tell us about your current advertising setup. We respond within one
+              business day with next steps for a consultation.
+            </p>
           </div>
-        </div>
+        </Container>
       </section>
 
-      <Footer />
-    </div>
+      <section className="py-20 lg:py-24">
+        <Container>
+          <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr]">
+            <div className="rounded-xl border border-border bg-card p-8 lg:p-10">
+              <h2 className="text-2xl font-medium text-foreground">
+                Request a consultation
+              </h2>
+              <p className="mt-2 text-sm text-muted-foreground">
+                Share a few details so we can prepare for a productive first call.
+              </p>
+
+              {submitSuccess && (
+                <div className="mt-6 flex items-start gap-3 rounded-lg border border-emerald-200 bg-emerald-50 p-4 text-emerald-900">
+                  <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0" />
+                  <div>
+                    <p className="font-medium">Message sent successfully.</p>
+                    <p className="text-sm">We’ll respond within 24 hours.</p>
+                  </div>
+                </div>
+              )}
+
+              {submitError && (
+                <div className="mt-6 rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-800">
+                  {submitError}
+                </div>
+              )}
+
+              <form onSubmit={handleSubmit(onSubmit)} className="mt-8 space-y-5">
+                <div className="grid gap-5 sm:grid-cols-2">
+                  <div>
+                    <label htmlFor="name" className="mb-2 block text-sm font-medium">
+                      Name *
+                    </label>
+                    <Input id="name" {...register("name")} placeholder="Jane Smith" />
+                    {errors.name && (
+                      <p className="mt-1 text-sm text-red-600">{errors.name.message}</p>
+                    )}
+                  </div>
+                  <div>
+                    <label htmlFor="email" className="mb-2 block text-sm font-medium">
+                      Email *
+                    </label>
+                    <Input
+                      id="email"
+                      type="email"
+                      {...register("email")}
+                      placeholder="jane@company.com"
+                    />
+                    {errors.email && (
+                      <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>
+                    )}
+                  </div>
+                </div>
+
+                <div>
+                  <label htmlFor="company" className="mb-2 block text-sm font-medium">
+                    Company
+                  </label>
+                  <Input id="company" {...register("company")} placeholder="Company name" />
+                </div>
+
+                <div>
+                  <label htmlFor="adSpend" className="mb-2 block text-sm font-medium">
+                    Monthly ad spend *
+                  </label>
+                  <Select
+                    onValueChange={(value: string | null) =>
+                      value && setValue("adSpend", value)
+                    }
+                  >
+                    <SelectTrigger className="w-full">
+                      <SelectValue placeholder="Select monthly ad spend" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="under-10k">Less than $10K</SelectItem>
+                      <SelectItem value="10k-50k">$10K – $50K</SelectItem>
+                      <SelectItem value="50k-100k">$50K – $100K</SelectItem>
+                      <SelectItem value="100k-plus">$100K+</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  {errors.adSpend && (
+                    <p className="mt-1 text-sm text-red-600">{errors.adSpend.message}</p>
+                  )}
+                </div>
+
+                <div>
+                  <label htmlFor="message" className="mb-2 block text-sm font-medium">
+                    How can we help? *
+                  </label>
+                  <Textarea
+                    id="message"
+                    {...register("message")}
+                    placeholder="Tell us about your current program, goals, and challenges..."
+                    className="min-h-[140px]"
+                  />
+                  {errors.message && (
+                    <p className="mt-1 text-sm text-red-600">{errors.message.message}</p>
+                  )}
+                </div>
+
+                <Button
+                  type="submit"
+                  size="lg"
+                  className="h-11 w-full sm:w-auto"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Sending...
+                    </>
+                  ) : (
+                    "Submit request"
+                  )}
+                </Button>
+              </form>
+            </div>
+
+            <aside className="space-y-6">
+              <div className="rounded-xl border border-border bg-card p-8">
+                <div className="flex items-start gap-4">
+                  <div className="rounded-lg bg-muted p-3">
+                    <Mail className="h-5 w-5 text-foreground" />
+                  </div>
+                  <div>
+                    <h3 className="font-medium text-foreground">Email</h3>
+                    <a
+                      href={`mailto:${company.email}`}
+                      className="mt-1 block text-sm text-muted-foreground hover:text-foreground"
+                    >
+                      {company.email}
+                    </a>
+                  </div>
+                </div>
+                <div className="mt-6 flex items-start gap-4">
+                  <div className="rounded-lg bg-muted p-3">
+                    <Clock className="h-5 w-5 text-foreground" />
+                  </div>
+                  <div>
+                    <h3 className="font-medium text-foreground">Office hours</h3>
+                    <p className="mt-1 text-sm text-muted-foreground">{company.hours}</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="rounded-xl border border-border bg-muted/40 p-8">
+                <h3 className="font-medium text-foreground">What happens next</h3>
+                <ol className="mt-4 space-y-3 text-sm text-muted-foreground">
+                  <li>1. We review your submission within one business day.</li>
+                  <li>2. We schedule a 30-minute discovery call.</li>
+                  <li>3. You receive a concise view of opportunities and next steps.</li>
+                </ol>
+              </div>
+            </aside>
+          </div>
+        </Container>
+      </section>
+    </>
   );
 }

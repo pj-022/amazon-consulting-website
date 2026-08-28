@@ -40,6 +40,7 @@ export function NarrativeSection({
         className
       )}
     >
+      <div className="narrative-accent-bar" aria-hidden />
       <Container className="relative">
         <div className="grid gap-16 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)] lg:gap-24">
           <motion.div
@@ -73,7 +74,18 @@ export function NarrativeSection({
               viewport={{ once: true, margin: "-60px" }}
               transition={{ ...transition, delay: 0.1 }}
             >
-              {headline}
+              {headline.split(" ").map((word, i) => (
+                <motion.span
+                  key={`${word}-${i}`}
+                  className="mr-[0.25em] inline-block"
+                  initial={reduceMotion ? false : { opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ ...transition, delay: 0.1 + i * 0.03 }}
+                >
+                  {word}
+                </motion.span>
+              ))}
             </motion.h2>
 
             {subhead ? (

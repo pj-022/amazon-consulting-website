@@ -18,7 +18,7 @@ export default function HomePage() {
     <>
       <HomeHero />
 
-      <Marquee items={capabilities} />
+      <Marquee items={capabilities} colorful />
 
       {narrativeSections.map((section, index) => (
         <NarrativeSection

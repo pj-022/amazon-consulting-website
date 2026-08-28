@@ -16,14 +16,14 @@ export function LinkRoll({
     <Link
       href={href}
       className={cn(
-        "link-roll text-sm uppercase tracking-[0.18em]",
+        "link-roll group text-sm font-medium uppercase tracking-[0.18em]",
         light ? "text-primary-foreground" : "text-foreground",
         className
       )}
     >
-      <span className="link-roll-text flex-col">
-        <span>{children}</span>
-        <span className={light ? "text-accent" : "text-accent"} aria-hidden>
+      <span className="link-roll-inner">
+        <span className="link-roll-line">{children}</span>
+        <span className="link-roll-line link-roll-line-hover" aria-hidden>
           {children}
         </span>
       </span>

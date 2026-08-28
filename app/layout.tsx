@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { DM_Sans, IBM_Plex_Mono, Newsreader } from "next/font/google";
+import { Cormorant_Garamond, DM_Sans, IBM_Plex_Mono, Syne } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
@@ -10,11 +10,17 @@ const dmSans = DM_Sans({
   weight: ["400", "500", "600"],
 });
 
-const newsreader = Newsreader({
+const cormorant = Cormorant_Garamond({
   variable: "--font-serif",
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: ["400", "500", "600", "700"],
   style: ["normal", "italic"],
+});
+
+const syne = Syne({
+  variable: "--font-display",
+  subsets: ["latin"],
+  weight: ["500", "600", "700", "800"],
 });
 
 const ibmPlexMono = IBM_Plex_Mono({
@@ -58,7 +64,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${dmSans.variable} ${newsreader.variable} ${ibmPlexMono.variable} h-full antialiased`}
+      className={`${dmSans.variable} ${cormorant.variable} ${syne.variable} ${ibmPlexMono.variable} h-full antialiased`}
     >
       <head>
         <script

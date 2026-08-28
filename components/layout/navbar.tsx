@@ -4,8 +4,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
+import { EditorialButton } from "@/components/editorial/editorial-button";
 import { Container } from "@/components/sections/container";
-import { LinkRoll } from "@/components/editorial/link-roll";
 import { company, navItems } from "@/lib/site-data";
 import { cn } from "@/lib/utils";
 
@@ -67,9 +67,9 @@ export function Navbar() {
         </Link>
 
         <div className="flex items-center gap-4">
-          <LinkRoll href="/contact" className="hidden sm:inline-flex">
+          <EditorialButton href="/contact" variant="primary" className="hidden px-5 py-2.5 text-xs sm:inline-flex">
             Book a consultation
-          </LinkRoll>
+          </EditorialButton>
           <Link
             href="/contact"
             className="inline-flex border border-foreground bg-foreground px-4 py-2 text-xs font-medium uppercase tracking-[0.14em] text-background transition-colors hover:bg-accent hover:border-accent sm:hidden"

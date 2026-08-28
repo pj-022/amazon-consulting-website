@@ -1,11 +1,13 @@
 "use client";
 
-import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 import { AnimatedCounter } from "@/components/motion/animated-counter";
 import { Container } from "@/components/sections/container";
 import { heroMetrics } from "@/lib/site-data";
 import { transition } from "@/lib/motion";
+import { cn } from "@/lib/utils";
+
+const valueColors = ["text-accent", "text-navy", "text-sage", "text-foreground"];
 
 export function MetricsEditorial() {
   const reduceMotion = useReducedMotion();
@@ -26,18 +28,35 @@ export function MetricsEditorial() {
           {heroMetrics.map((metric, index) => (
             <motion.div
               key={metric.label}
-              className="bg-background px-6 py-10 lg:px-8 lg:py-12"
+              className="group bg-background px-6 py-10 transition-colors hover:bg-cream/80 lg:px-8 lg:py-12"
               initial={reduceMotion ? false : { opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ ...transition, delay: index * 0.1 }}
             >
-              <p className="font-serif text-4xl tracking-tight text-foreground sm:text-5xl">
+              <p
+                className={cn(
+                  "font-display text-4xl font-semibold tracking-tight sm:text-5xl",
+                  valueColors[index % valueColors.length]
+                )}
+              >
                 <AnimatedCounter value={metric.value} startOnMount />
               </p>
               <p className="mt-3 max-w-[12rem] text-sm leading-relaxed text-muted-foreground">
                 {metric.label}
               </p>
+              <span
+                className={cn(
+                  "mt-6 block h-px w-8 transition-all duration-500 group-hover:w-16",
+                  index % 4 === 0
+                    ? "bg-accent"
+                    : index % 4 === 1
+                      ? "bg-navy"
+                      : index % 4 === 2
+                        ? "bg-sage"
+                        : "bg-foreground/30"
+                )}
+              />
             </motion.div>
           ))}
         </div>

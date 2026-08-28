@@ -20,16 +20,64 @@ export const navItems = [
   { href: "/contact", label: "Contact" },
 ] as const;
 
+export const brandThemes = {
+  coral: {
+    bg: "bg-[#FFF0E8]",
+    border: "border-[#FFB899]",
+    text: "text-[#C2410C]",
+    gradient: "from-[#FF6B35] to-[#FF9F68]",
+    dot: "bg-[#FF6B35]",
+  },
+  sky: {
+    bg: "bg-[#E8F4FF]",
+    border: "border-[#7EC8FF]",
+    text: "text-[#0369A1]",
+    gradient: "from-[#0EA5E9] to-[#38BDF8]",
+    dot: "bg-[#0EA5E9]",
+  },
+  violet: {
+    bg: "bg-[#F3EEFF]",
+    border: "border-[#C4B5FD]",
+    text: "text-[#6D28D9]",
+    gradient: "from-[#8B5CF6] to-[#A78BFA]",
+    dot: "bg-[#8B5CF6]",
+  },
+  mint: {
+    bg: "bg-[#E8FFF5]",
+    border: "border-[#6EE7B7]",
+    text: "text-[#047857]",
+    gradient: "from-[#10B981] to-[#34D399]",
+    dot: "bg-[#10B981]",
+  },
+  amber: {
+    bg: "bg-[#FFF8E8]",
+    border: "border-[#FCD34D]",
+    text: "text-[#B45309]",
+    gradient: "from-[#F59E0B] to-[#FBBF24]",
+    dot: "bg-[#F59E0B]",
+  },
+  rose: {
+    bg: "bg-[#FFF0F3]",
+    border: "border-[#FDA4AF]",
+    text: "text-[#BE123C]",
+    gradient: "from-[#F43F5E] to-[#FB7185]",
+    dot: "bg-[#F43F5E]",
+  },
+} as const;
+
+export type BrandThemeKey = keyof typeof brandThemes;
+
 export const heroMetrics = [
-  { value: "50+", label: "Vendor Central clients" },
-  { value: "40%", label: "Average ROAS lift" },
-  { value: "$15M+", label: "Ad spend advised" },
-  { value: "3 yrs", label: "Avg. partnership length" },
+  { value: "50+", label: "Vendor Central clients", theme: "sky" as BrandThemeKey },
+  { value: "40%", label: "Average ROAS lift", theme: "coral" as BrandThemeKey },
+  { value: "$15M+", label: "Ad spend advised", theme: "violet" as BrandThemeKey },
+  { value: "3 yrs", label: "Avg. partnership length", theme: "mint" as BrandThemeKey },
 ] as const;
 
 export type Service = {
   id: string;
   icon: LucideIcon;
+  theme: BrandThemeKey;
   title: string;
   summary: string;
   description: string;
@@ -42,6 +90,7 @@ export const services: Service[] = [
   {
     id: "strategy",
     icon: Target,
+    theme: "sky",
     title: "Campaign Strategy & Optimization",
     summary:
       "Architecture and optimization for Sponsored Products, Brands, and Display.",
@@ -60,6 +109,7 @@ export const services: Service[] = [
   {
     id: "budget",
     icon: TrendingUp,
+    theme: "mint",
     title: "Budget Allocation & Planning",
     summary:
       "Forecasting and portfolio-level budget decisions tied to ROAS targets.",
@@ -78,6 +128,7 @@ export const services: Service[] = [
   {
     id: "audits",
     icon: BarChart3,
+    theme: "violet",
     title: "Performance Audits",
     summary:
       "A structured review of account health, waste, and quick-win opportunities.",
@@ -96,6 +147,7 @@ export const services: Service[] = [
   {
     id: "reporting",
     icon: LineChart,
+    theme: "amber",
     title: "Reporting & Analytics",
     summary:
       "Executive-ready reporting that connects ad spend to business outcomes.",
@@ -116,24 +168,28 @@ export const services: Service[] = [
 export const processSteps = [
   {
     step: "01",
+    theme: "coral" as BrandThemeKey,
     title: "Discovery & Audit",
     description:
       "We review your current program, commercial goals, and competitive context to establish a baseline and identify immediate opportunities.",
   },
   {
     step: "02",
+    theme: "sky" as BrandThemeKey,
     title: "Strategy Development",
     description:
       "We define campaign architecture, budget priorities, and KPI targets — with a clear roadmap your internal team can implement.",
   },
   {
     step: "03",
+    theme: "violet" as BrandThemeKey,
     title: "Implementation Support",
     description:
       "We guide execution, validate changes, and ensure recommendations are adopted correctly across teams and agencies.",
   },
   {
     step: "04",
+    theme: "mint" as BrandThemeKey,
     title: "Ongoing Optimization",
     description:
       "We monitor performance, refine strategy monthly, and adapt plans as assortment, seasonality, and competition shift.",
@@ -144,6 +200,7 @@ export const caseStudies = [
   {
     slug: "consumer-electronics",
     category: "Consumer Electronics",
+    theme: "sky" as BrandThemeKey,
     client: "TechGear Solutions",
     headline: "Rebuilt a declining program into a profitable growth engine",
     challenge:
@@ -168,6 +225,7 @@ export const caseStudies = [
   {
     slug: "home-kitchen",
     category: "Home & Kitchen",
+    theme: "mint" as BrandThemeKey,
     client: "HomeStyle Brands",
     headline: "Launched a Vendor Central advertising program from zero",
     challenge:
@@ -192,6 +250,7 @@ export const caseStudies = [
   {
     slug: "health-personal-care",
     category: "Health & Personal Care",
+    theme: "rose" as BrandThemeKey,
     client: "WellnessFirst",
     headline: "Executed a Prime Day plan that maximized inventory velocity",
     challenge:
@@ -217,6 +276,7 @@ export const caseStudies = [
 
 export const testimonials = [
   {
+    theme: "coral" as BrandThemeKey,
     quote:
       "VendorEdge transformed our Amazon advertising from a cost center into a measurable growth lever. ROAS improved 52% within the first quarter.",
     author: "Sarah Mitchell",
@@ -224,6 +284,7 @@ export const testimonials = [
     company: "TechGear Solutions",
   },
   {
+    theme: "violet" as BrandThemeKey,
     quote:
       "Their Vendor Central depth is rare. We get strategic guidance that connects advertising decisions to revenue and inventory outcomes.",
     author: "David Chen",
@@ -231,6 +292,7 @@ export const testimonials = [
     company: "HomeStyle Brands",
   },
   {
+    theme: "mint" as BrandThemeKey,
     quote:
       "Prime Day used to be chaotic. VendorEdge gave us structure, pacing discipline, and confidence in our spend.",
     author: "Jessica Roberts",
@@ -249,3 +311,14 @@ export const capabilities = [
   "Executive reporting",
   "Prime Day planning",
 ] as const;
+
+export const capabilityThemes: BrandThemeKey[] = [
+  "coral",
+  "sky",
+  "violet",
+  "mint",
+  "amber",
+  "rose",
+  "coral",
+  "sky",
+];

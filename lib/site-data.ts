@@ -1,6 +1,5 @@
 import {
   BarChart3,
-  FileText,
   LineChart,
   Target,
   TrendingUp,

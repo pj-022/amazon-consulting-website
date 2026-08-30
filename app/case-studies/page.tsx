@@ -64,13 +64,13 @@ export default function CaseStudiesPage() {
               </div>
 
               <div className={index % 2 === 1 ? "lg:order-1" : ""}>
-                <div className="border border-border bg-background p-8 lg:p-10">
+                <div className="border border-border bg-card p-8 lg:p-10">
                   <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
                     Results
                   </p>
                   <div className="mt-6 grid grid-cols-2 gap-px bg-border">
                     {study.results.map((result) => (
-                      <div key={result.label} className="bg-cream p-5">
+                      <div key={result.label} className="bg-card p-5">
                         <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
                           {result.label}
                         </p>
@@ -82,7 +82,7 @@ export default function CaseStudiesPage() {
                   </div>
 
                   <figure className="mt-10 border-t border-border pt-10">
-                    <blockquote className="font-serif text-lg italic leading-relaxed text-foreground/80">
+                    <blockquote className="font-serif text-lg italic leading-relaxed text-muted-foreground">
                       &ldquo;{study.quote}&rdquo;
                     </blockquote>
                     <figcaption className="mt-6 text-sm">
@@ -109,7 +109,7 @@ export default function CaseStudiesPage() {
 
       <section className="section-ink grain py-24 lg:py-32">
         <Container className="text-center">
-          <h2 className="display-md text-primary-foreground">
+          <h2 className="display-md text-on-ink">
             Want similar outcomes for your program?
           </h2>
           <p className="body-editorial-light mx-auto mt-6 max-w-xl">

@@ -14,6 +14,7 @@
   --color-navy: var(--navy);
   --color-sage: var(--sage);
   --color-blush: var(--blush);
+  --color-on-ink: var(--on-ink);
   --font-sans: var(--font-sans);
   --font-serif: var(--font-serif);
   --font-display: var(--font-display);
@@ -111,6 +112,9 @@
   --cream-glow: #e8d5c440;
   --ink-glow-1: #c24e1a18;
   --ink-glow-2: #3d5a4a15;
+  --on-ink: #faf7f2;
+  --brand-violet: #7c3aed;
+  --brand-rose: #e11d48;
 }
 
 .dark {
@@ -165,6 +169,10 @@
   --cream-glow: #e8622a0a;
   --ink-glow-1: #e8622a20;
   --ink-glow-2: #6aab8a18;
+  --on-ink: #f2ece3;
+  --brand-violet: #a78bfa;
+  --brand-rose: #fb7185;
+  --muted-foreground: #b5b0ab;
 }
 
 @layer base {
@@ -220,7 +228,7 @@
   }
 
   .editorial-label-light {
-    @apply font-mono text-[11px] font-medium uppercase tracking-[0.22em] text-primary-foreground/45;
+    @apply font-mono text-[11px] font-medium uppercase tracking-[0.22em] text-on-ink/50;
   }
 
   .display-xl {
@@ -244,7 +252,7 @@
   }
 
   .body-editorial-light {
-    @apply text-base leading-[1.75] text-primary-foreground/65 sm:text-lg;
+    @apply text-base leading-[1.75] text-on-ink/70 sm:text-lg;
   }
 
   .rule-h {
@@ -252,7 +260,7 @@
   }
 
   .rule-h-light {
-    @apply h-px w-full bg-primary-foreground/15;
+    @apply h-px w-full bg-on-ink/15;
   }
 
   .num-display {
@@ -291,7 +299,7 @@
   }
 
   .editorial-btn-primary {
-    @apply border border-foreground bg-foreground text-background hover:border-accent hover:bg-accent;
+    @apply border border-foreground bg-foreground text-background hover:border-accent hover:bg-accent hover:text-accent-foreground;
   }
 
   .editorial-btn-outline {
@@ -338,7 +346,19 @@
       radial-gradient(ellipse 70% 60% at 80% 20%, var(--ink-glow-1), transparent 55%),
       radial-gradient(ellipse 50% 50% at 10% 80%, var(--ink-glow-2), transparent 50%),
       var(--surface-ink);
-    color: var(--primary-foreground);
+    color: var(--on-ink);
+  }
+
+  .section-ink .text-foreground {
+    color: var(--on-ink);
+  }
+
+  .section-ink .text-muted-foreground {
+    color: color-mix(in oklch, var(--on-ink) 65%, transparent);
+  }
+
+  .section-ink .text-primary-foreground {
+    color: var(--on-ink);
   }
 
   .narrative-accent-bar {

@@ -34,7 +34,7 @@ export function MetricsStrip() {
               >
                 <AnimatedCounter value={metric.value} startOnMount />
               </p>
-              <p className="mt-2 text-sm font-medium text-foreground/70">
+              <p className="mt-2 text-sm font-medium text-muted-foreground">
                 {metric.label}
               </p>
             </div>

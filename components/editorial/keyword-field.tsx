@@ -4,12 +4,12 @@ import { motion, useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 const keywordColors = [
-  "border-accent/30 bg-accent/8 text-accent",
-  "border-navy/25 bg-navy/8 text-navy",
+  "border-accent/30 bg-accent/10 text-accent",
+  "border-navy/30 bg-navy/10 text-navy",
   "border-sage/30 bg-sage/10 text-sage",
-  "border-terracotta/25 bg-blush/50 text-foreground/80",
-  "border-foreground/15 bg-background text-muted-foreground",
-  "border-accent/20 bg-accent/5 text-accent",
+  "border-terracotta/25 bg-blush/30 text-foreground",
+  "border-border bg-card text-muted-foreground",
+  "border-accent/20 bg-accent/8 text-accent",
 ];
 
 export function KeywordField({
@@ -31,7 +31,7 @@ export function KeywordField({
           className={cn(
             "rounded-sm border px-4 py-2 font-mono text-xs uppercase tracking-[0.15em] sm:text-sm",
             light
-              ? "border-primary-foreground/15 bg-primary-foreground/5 text-primary-foreground/70"
+              ? "border-on-ink/15 bg-on-ink/5 text-on-ink/75"
               : keywordColors[index % keywordColors.length]
           )}
           initial={reduceMotion ? false : { opacity: 0, y: 16, rotate: 0 }}

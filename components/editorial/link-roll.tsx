@@ -17,7 +17,7 @@ export function LinkRoll({
       href={href}
       className={cn(
         "link-roll group text-sm font-medium uppercase tracking-[0.18em]",
-        light ? "text-primary-foreground" : "text-foreground",
+        light ? "text-on-ink" : "text-foreground",
         className
       )}
     >

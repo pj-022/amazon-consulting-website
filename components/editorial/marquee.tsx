@@ -36,7 +36,7 @@ export function Marquee({
     <div
       className={cn(
         "overflow-hidden border-y",
-        light ? "border-primary-foreground/10 bg-ink" : "border-border bg-muted/30",
+        light ? "border-on-ink/10 bg-ink" : "border-border bg-muted/30",
         className
       )}
     >
@@ -55,7 +55,7 @@ export function Marquee({
               colorful
                 ? palette[i % palette.length]
                 : light
-                  ? "text-primary-foreground/55"
+                  ? "text-on-ink/60"
                   : "text-foreground/75"
             )}
           >

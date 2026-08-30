@@ -28,7 +28,7 @@ export function MetricsEditorial() {
           {heroMetrics.map((metric, index) => (
             <motion.div
               key={metric.label}
-              className="group bg-background px-6 py-10 transition-colors hover:bg-cream/80 lg:px-8 lg:py-12"
+              className="group bg-card px-6 py-10 transition-colors hover:bg-muted/60 lg:px-8 lg:py-12"
               initial={reduceMotion ? false : { opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}

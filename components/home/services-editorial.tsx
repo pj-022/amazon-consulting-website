@@ -44,7 +44,7 @@ export function ServicesEditorial() {
               >
                 <Link
                   href={`/services#${service.id}`}
-                  className="group grid gap-4 py-8 transition-colors hover:bg-cream/50 sm:grid-cols-[4rem_1fr_auto] sm:items-start sm:gap-8 sm:px-4"
+                  className="group grid gap-4 py-8 transition-colors hover:bg-muted/40 sm:grid-cols-[4rem_1fr_auto] sm:items-start sm:gap-8 sm:px-4"
                 >
                   <span className="num-display pt-1">
                     {String(index + 1).padStart(2, "0")}

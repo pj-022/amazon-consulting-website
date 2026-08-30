@@ -50,7 +50,7 @@ export function WorkEditorial() {
               </div>
               <div className="grid grid-cols-2 gap-px bg-border">
                 {study.results.map((result) => (
-                  <div key={result.label} className="bg-background p-5 sm:p-6">
+                  <div key={result.label} className="bg-card p-5 sm:p-6">
                     <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
                       {result.label}
                     </p>

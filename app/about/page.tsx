@@ -76,24 +76,24 @@ export default function AboutPage() {
 
       <section
         id="process"
-        className="section-ink grain border-y border-primary-foreground/10 py-24 lg:py-32"
+        className="section-ink grain border-y border-on-ink/10 py-24 lg:py-32"
       >
         <Container>
           <p className="editorial-label-light">Engagement model</p>
-          <h2 className="display-md mt-6 max-w-3xl text-primary-foreground">
+          <h2 className="display-md mt-6 max-w-3xl text-on-ink">
             How engagements typically run
           </h2>
           <div className="mt-16 grid gap-12 sm:grid-cols-2 lg:grid-cols-4">
             {processSteps.map((step) => (
               <div
                 key={step.step}
-                className="border-t border-primary-foreground/15 pt-6"
+                className="border-t border-on-ink/15 pt-6"
               >
                 <p className="num-display">{step.step}</p>
-                <h3 className="mt-4 text-lg text-primary-foreground">
+                <h3 className="mt-4 text-lg text-on-ink">
                   {step.title}
                 </h3>
-                <p className="mt-3 text-sm leading-relaxed text-primary-foreground/55">
+                <p className="mt-3 text-sm leading-relaxed text-on-ink/65">
                   {step.description}
                 </p>
               </div>

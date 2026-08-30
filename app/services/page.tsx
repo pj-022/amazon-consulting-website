@@ -81,7 +81,7 @@ export default function ServicesPage() {
                         {service.deliverables.map((item) => (
                           <li
                             key={item}
-                            className="py-4 text-sm leading-relaxed text-foreground/80"
+                            className="py-4 text-sm leading-relaxed text-muted-foreground"
                           >
                             {item}
                           </li>
@@ -99,7 +99,7 @@ export default function ServicesPage() {
       <section className="section-ink grain py-24 lg:py-32">
         <Container className="text-center">
           <p className="editorial-label-light">Next step</p>
-          <h2 className="display-md mt-6 text-primary-foreground">
+          <h2 className="display-md mt-6 text-on-ink">
             Not sure which engagement fits?
           </h2>
           <p className="body-editorial-light mx-auto mt-6 max-w-xl">

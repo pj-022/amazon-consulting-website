@@ -32,7 +32,7 @@ export function LanguagesSection() {
           We are multilingual
         </motion.p>
         <motion.h2
-          className="display-lg mt-6 max-w-3xl text-primary-foreground"
+          className="display-lg mt-6 max-w-3xl text-on-ink"
           initial={reduceMotion ? false : { opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -69,7 +69,7 @@ export function LanguagesSection() {
               <p className="font-display text-3xl font-semibold text-accent sm:text-4xl">
                 {lang.word}
               </p>
-              <p className="mt-4 text-sm leading-relaxed text-primary-foreground/55">
+              <p className="mt-4 text-sm leading-relaxed text-on-ink/65">
                 {lang.description}
               </p>
             </motion.div>

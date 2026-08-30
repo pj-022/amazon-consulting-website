@@ -77,7 +77,7 @@ export default function ContactPage() {
       <section className="section-cream py-24 lg:py-32">
         <Container>
           <div className="grid gap-16 lg:grid-cols-[1.1fr_0.9fr] lg:gap-24">
-            <div className="border border-border bg-background p-8 lg:p-12">
+            <div className="border border-border bg-card p-8 lg:p-12">
               <h2 className="font-serif text-2xl tracking-tight text-foreground">
                 Request a consultation
               </h2>
@@ -87,7 +87,7 @@ export default function ContactPage() {
               </p>
 
               {submitSuccess && (
-                <div className="mt-8 flex items-start gap-3 border border-emerald-300/50 bg-emerald-50 p-4 text-emerald-900">
+                <div className="mt-8 flex items-start gap-3 border border-emerald-500/30 bg-emerald-500/10 p-4 text-emerald-900 dark:text-emerald-200">
                   <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0" />
                   <div>
                     <p className="font-medium">Message sent successfully.</p>
@@ -97,7 +97,7 @@ export default function ContactPage() {
               )}
 
               {submitError && (
-                <div className="mt-8 border border-red-200 bg-red-50 p-4 text-sm text-red-800">
+                <div className="mt-8 border border-red-500/30 bg-red-500/10 p-4 text-sm text-red-800 dark:text-red-200">
                   {submitError}
                 </div>
               )}
@@ -110,7 +110,7 @@ export default function ContactPage() {
                     </label>
                     <Input id="name" {...register("name")} placeholder="Jane Smith" className="rounded-none border-border bg-transparent" />
                     {errors.name && (
-                      <p className="mt-1 text-sm text-red-600">{errors.name.message}</p>
+                      <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.name.message}</p>
                     )}
                   </div>
                   <div>
@@ -119,7 +119,7 @@ export default function ContactPage() {
                     </label>
                     <Input id="email" type="email" {...register("email")} placeholder="jane@company.com" className="rounded-none border-border bg-transparent" />
                     {errors.email && (
-                      <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>
+                      <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.email.message}</p>
                     )}
                   </div>
                 </div>
@@ -151,7 +151,7 @@ export default function ContactPage() {
                     </SelectContent>
                   </Select>
                   {errors.adSpend && (
-                    <p className="mt-1 text-sm text-red-600">{errors.adSpend.message}</p>
+                    <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.adSpend.message}</p>
                   )}
                 </div>
 
@@ -166,14 +166,14 @@ export default function ContactPage() {
                     className="min-h-[140px] rounded-none border-border bg-transparent"
                   />
                   {errors.message && (
-                    <p className="mt-1 text-sm text-red-600">{errors.message.message}</p>
+                    <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.message.message}</p>
                   )}
                 </div>
 
                 <Button
                   type="submit"
                   size="lg"
-                  className="h-12 w-full rounded-none bg-foreground uppercase tracking-[0.14em] hover:bg-accent sm:w-auto"
+                  className="h-12 w-full rounded-none bg-foreground text-background uppercase tracking-[0.14em] hover:bg-accent hover:text-accent-foreground sm:w-auto"
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? (

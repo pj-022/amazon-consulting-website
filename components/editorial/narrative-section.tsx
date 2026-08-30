@@ -56,7 +56,7 @@ export function NarrativeSection({
             <p
               className={cn(
                 "mt-8 font-mono text-6xl tabular-nums leading-none sm:text-8xl",
-                inverted ? "text-primary-foreground/20" : "text-foreground/10"
+                inverted ? "text-on-ink/20" : "text-foreground/10"
               )}
             >
               {number}
@@ -67,7 +67,7 @@ export function NarrativeSection({
             <motion.h2
               className={cn(
                 "display-lg uppercase",
-                inverted ? "text-primary-foreground" : "text-foreground"
+                inverted ? "text-on-ink" : "text-foreground"
               )}
               initial={reduceMotion ? false : { opacity: 0, y: 32 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -92,7 +92,7 @@ export function NarrativeSection({
               <motion.p
                 className={cn(
                   "mt-8 max-w-xl text-lg italic sm:text-xl",
-                  inverted ? "text-primary-foreground/70" : "text-foreground/70"
+                  inverted ? "text-on-ink/75" : "text-foreground/75"
                 )}
                 initial={reduceMotion ? false : { opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
